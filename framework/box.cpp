@@ -3,12 +3,12 @@
 Box::Box():
 	Shape({"Box"},{0,0,0}),
 	min_{0,0,0},
-	max_{0,0,0}{}
+	max_{0,0,0}{ std::cout << "Box::Constructor" << std::endl; }
 
 Box::Box(std::string name, Color color, glm::vec3 min, glm::vec3 max):
 	Shape({name},{color}),
 	min_{min},
-	max_{max}{}
+	max_{max}{ std::cout << "Box::Constructor" << std::endl;}
 
 float Box::area() const {
 	float xLength = abs(max_.x - min_.x);

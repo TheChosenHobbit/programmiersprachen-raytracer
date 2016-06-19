@@ -37,10 +37,9 @@ TEST_CASE("Box Area und Volume","[Box]"){
 
 TEST_CASE("Print","[Ausgabe]"){
 	Color red {1,0,0};
-	Box b {{"Box"},{red}, {1,1,1}, {2,2,2}};
 	Sphere s{{"Sphere"}, {red}, {1,1,1}, {2}};
-
 	std::cout << s;
+	Box b {{"Box"},{red}, {1,1,1}, {2,2,2}};
 	std::cout << b;
 }
 
