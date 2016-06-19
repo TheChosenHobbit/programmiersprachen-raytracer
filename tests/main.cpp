@@ -117,17 +117,34 @@ Sphere::Destructor 				Sphere::Destructor
 Shape::Destructor 				Shape::Destructor
 Sphere::Destructor
 Shape::Destructor 				Shape::Destructor
-
-
-
-
-
-
-
-
-
 		*/
 	}
+
+	/* Aufgabe 5.9 
+	Klassenhierarchie vs. Objekthierarchie
+	Eine Menge von Klassen, deren Elemente durch die Relation Spezialisierung bzw. Generalisierung miteinander in 
+	Beziehung gesetzt sind, bezeichnet man als Klassenhierarchie, wenn jede Klasse höchstens eine Basisklasse besitzt.
+	Basisklasse heißt eine Klasse von der durch Spezialisierung eine abgeleitete Klasse gebildet wurde.
+	Quelle: http://www2.htw-dresden.de/~sobe/Vorjahre/Vo_Info2_Jg10/9_Klassenhierarchien.pdf
+
+	Unter Objekthirarchie versteht man die partielle Ordnung auf der Menge der Objekte entsprechend der zwischen ihnen bestehenden 
+	Kompositionsbeziehung ("part-of"-Beziehung). Komponenten werden dabei als Nachfolger des Objekts, dem sie angehören, 
+	angeordnet. Objekthierarchien werden aufbauend auf komplexen Objekten gebildet und sind dynamisch, da sie zur Laufzeit
+	durch Zuweisen, Erzeugen und Löschen von Objekten verändert werden können. Sie werden durch gerichtete Graphen dargestellt.
+
+	Klassendiagramm vs. Objektdiagramm
+	Beides Strukturdiagramme
+
+	grafischen Darstellung (Modellierung) von Klassen, Schnittstellen sowie deren Beziehungen. 
+	Eine Klasse ist in der Objektorientierung ein abstrakter Oberbegriff für die Beschreibung der gemeinsamen Struktur 
+	und des gemeinsamen Verhaltens von Objekten (Klassifizierung). Sie dient dazu, Objekte zu abstrahieren.
+
+	zeigt eine bestimmte Sicht auf die Struktur des modellierten Systems. Die Darstellung umfasst dabei 
+	typischerweise Ausprägungsspezifikationen von Klassen und Assoziationen
+	zeigt den aktuellen Zustand, d. h. die Belegung der Attribute, eines Objektes bzw. einer Klasse. 
+	Da die Anzahl der Attribute sehr groß sein kann, ist es möglich, nur bestimmte Attribute aufzulisten, 
+	welche für den Zweck, den man verdeutlichen möchte ausreichen.
+		*/
 
 int main(int argc, char *argv[])
 {
