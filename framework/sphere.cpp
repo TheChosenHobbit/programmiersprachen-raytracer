@@ -1,5 +1,7 @@
 #include "sphere.hpp"
 #include <cmath>
+#include <glm/glm.hpp>
+#include <glm/gtx/intersect.hpp>
 
 Sphere::Sphere():
 	Shape({"Sphere"},{0.0f,0.0f,0.0f}),
@@ -32,4 +34,9 @@ std::ostream& Sphere::print(std::ostream& os) const{
 	os << "Center: " << center_.x << ", " << center_.y << ", " << center_.z << std::endl;
 	os << "Radius: " << radius_ << std::endl;
 	return os;
+}
+
+bool Sphere::intersect (Ray const& ray, float& distance){
+	auto v = glm::normalize(ray.direction);
+	return glm::intersectRaySphere(ray.origin, v, center_, radius_*radius_, distance);
 }

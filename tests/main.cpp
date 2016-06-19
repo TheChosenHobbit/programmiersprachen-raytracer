@@ -5,6 +5,8 @@
 #include <cmath>
 #include "shape.hpp"
 #include <iostream>
+#include <glm/glm.hpp>
+#include <glm/gtx/intersect.hpp>
 
 TEST_CASE ("Sphere Area and Volume","[Sphere]"){
 	Color red {1,0,0};
@@ -41,6 +43,34 @@ TEST_CASE("Print","[Ausgabe]"){
 	std::cout << s;
 	Box b {{"Box"},{red}, {1,1,1}, {2,2,2}};
 	std::cout << b;
+}
+
+TEST_CASE("intersectRaySphere","[intersect]"){
+	//Ray
+	glm::vec3 ray_origin{0.0,0.0,0.0};
+	//ray direction has to be normalized !
+	//you can use:
+	//	v = glm:: normalize(some_vector)
+	glm::vec3 ray_direction{0.0 ,0.0 ,1.0};
+	// Sphere
+	glm::vec3 sphere_center{0.0 ,0.0 ,5.0};
+	float sphere_radius{1.0};
+	float distance{0.0};
+	auto result = glm::intersectRaySphere(ray_origin, ray_direction, sphere_center,
+		sphere_radius * sphere_radius,	// squared radius !!!
+		distance);
+	REQUIRE(distance == Approx(4.0f));
+}
+
+TEST_CASE("example", "[aufgabe 7 ]"){
+	Color red(255, 0, 0);
+	glm::vec3 position(0.0, 0.0, 0.0);
+
+	std::shared_ptr<Sphere> s1 = std::make_shared<Sphere>("sphere0", red, position, 1.2f);
+	std::shared_ptr<Shape> s2 = std::make_shared<Sphere>("sphere1", red, position, 1.2f);
+
+	s1->print(std::cout);
+	s2->print(std::cout);
 }
 
 int main(int argc, char *argv[])
