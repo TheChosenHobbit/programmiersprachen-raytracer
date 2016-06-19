@@ -33,3 +33,10 @@ glm::vec3 Box::getMin() const {
 glm::vec3 Box::getMax() const {
 	return max_;
 }
+
+std::ostream& Box::print(std::ostream& os) const{
+	Shape::print(os);
+	os << "Minimum: " << min_.x << ", " << min_.y << ", " << min_.z << std::endl;
+	os << "Maximum: " << max_.x << ", " << max_.y << ", " << max_.z << std::endl;
+	return os;
+}

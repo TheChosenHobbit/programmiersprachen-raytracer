@@ -19,6 +19,8 @@ public:
     std::string const& getName() const;
     Color const& getColor() const;
 
+    virtual std::ostream& print(std::ostream& os) const;
+
 protected:
 	std::string name_;
 	Color color_;
@@ -27,5 +29,7 @@ und allen abgeleiteten Klassen gesehen und manipuliert werden
 – allerdings nicht von außerhalb.*/
 
 };
+
+std::ostream& operator<<(std::ostream& os, Shape const& s);
 
 #endif //#define SHAPE_HPP

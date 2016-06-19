@@ -4,6 +4,7 @@
 #include "box.hpp"
 #include <cmath>
 #include "shape.hpp"
+#include <iostream>
 
 TEST_CASE ("Sphere Area and Volume","[Sphere]"){
 	Color red {1,0,0};
@@ -34,6 +35,14 @@ TEST_CASE("Box Area und Volume","[Box]"){
 	REQUIRE(b2.volume() == Approx(0.0f));
 }
 
+TEST_CASE("Print","[Ausgabe]"){
+	Color red {1,0,0};
+	Box b {{"Box"},{red}, {1,1,1}, {2,2,2}};
+	Sphere s{{"Sphere"}, {red}, {1,1,1}, {2}};
+
+	std::cout << s;
+	std::cout << b;
+}
 
 int main(int argc, char *argv[])
 {
