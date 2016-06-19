@@ -10,6 +10,8 @@ Box::Box(std::string name, Color color, glm::vec3 min, glm::vec3 max):
 	min_{min},
 	max_{max}{ std::cout << "Box::Constructor" << std::endl;}
 
+Box::~Box(){ std::cout << "Box::Destructor" << std::endl; }
+
 float Box::area() const {
 	float xLength = abs(max_.x - min_.x);
 	float yLength = abs(max_.y - min_.y);

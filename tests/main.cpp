@@ -9,6 +9,7 @@
 #include <glm/gtx/intersect.hpp>
 
 TEST_CASE ("Sphere Area and Volume","[Sphere]"){
+	std::cout << "____________________Sphere___________________" << std::endl;
 	Color red {1,0,0};
 	Sphere s{{"test"},red,{1.0,1.0,1.0},{2}};
 	REQUIRE(s.area() == Approx(4*M_PI*2));
@@ -23,6 +24,7 @@ TEST_CASE ("Sphere Area and Volume","[Sphere]"){
 }
 
 TEST_CASE("Box Area und Volume","[Box]"){
+	std::cout << "____________________Box___________________" << std::endl;
 	Box b{{"Box"},{0,0,1},{1.0,1.0,1.0},{2.0,2.0,2.0}};
 	REQUIRE(b.area() == Approx(6.0f));
 	REQUIRE(b.volume() == Approx(1.0f));
@@ -38,6 +40,7 @@ TEST_CASE("Box Area und Volume","[Box]"){
 }
 
 TEST_CASE("Print","[Ausgabe]"){
+	std::cout << "____________________Ausgabe___________________" << std::endl;
 	Color red {1,0,0};
 	Sphere s{{"Sphere"}, {red}, {1,1,1}, {2}};
 	std::cout << s;
@@ -46,6 +49,7 @@ TEST_CASE("Print","[Ausgabe]"){
 }
 
 TEST_CASE("intersectRaySphere","[intersect]"){
+	std::cout << "____________________intersect___________________" << std::endl;
 	//Ray
 	glm::vec3 ray_origin{0.0,0.0,0.0};
 	//ray direction has to be normalized !
@@ -62,7 +66,8 @@ TEST_CASE("intersectRaySphere","[intersect]"){
 	REQUIRE(distance == Approx(4.0f));
 }
 
-TEST_CASE("example", "[aufgabe 7 ]"){
+TEST_CASE("Statisch und Dynamisch", "[Aufgabe 7]"){
+	std::cout << "____________________Aufgabe 7___________________" << std::endl;
 	Color red(255, 0, 0);
 	glm::vec3 position(0.0, 0.0, 0.0);
 
@@ -71,7 +76,58 @@ TEST_CASE("example", "[aufgabe 7 ]"){
 
 	s1->print(std::cout);
 	s2->print(std::cout);
+	/* Die Klasse, die bei der Deklaration einer Variablen verwendet wird, wird auch als statische Klasse 
+	dieser Variable bezeichnet.
+	Die tatsächliche Klasse des Wertes, der durch die Variable referenziert wird, wird als dynamische Klasse
+	dieser Variable bezeichnet. Normalerweise sind bei statisch getypten Sprachen statische und dynamische Klasse einer 
+	Variablen identisch.
+	Im Kontext der Vererbung erlauben statisch typisierte OO-Sprachen, dass die dynamische Klasse einer Variablen
+	eine von der statischen Klasse abgeleitete Klasse sein kann */
 }
+
+	TEST_CASE("Virtual Dekonstructor", "[Dekonstructor]"){
+		std::cout << "____________________Dekonstructor___________________" << std::endl;
+		Color red(255, 0, 0);
+		glm::vec3 position(0.0, 0.0, 0.0);
+
+		Sphere* s1 = new Sphere("sphere0", red, position, 1.2f);
+		Shape* s2 = new Sphere("sphere1", red, position, 1.2f);
+
+		s1->print(std::cout);
+		s2->print(std::cout);
+
+		delete s1;
+		delete s2;
+		/*
+MIT virtual  					OHNE virtual
+
+Shape::Constructor				Shape::Constructor
+Sphere::Constructor				Sphere::Constructor
+Shape::Constructor				Shape::Constructor
+Sphere::Constructor				Sphere::Constructor
+Name: sphere0					Name: sphere0
+Color: 255, 0, 0, 				Color: 255, 0, 0, 
+Center: 0, 0, 0 				Center: 0, 0, 0
+Radius: 1.2 					Radius: 1.2
+Name: sphere1 					Name: sphere1
+Color: 255, 0, 0,  				Color: 255, 0, 0, 
+Center: 0, 0, 0 				Center: 0, 0, 0
+Radius: 1.2 					Radius: 1.2
+Sphere::Destructor 				Sphere::Destructor
+Shape::Destructor 				Shape::Destructor
+Sphere::Destructor
+Shape::Destructor 				Shape::Destructor
+
+
+
+
+
+
+
+
+
+		*/
+	}
 
 int main(int argc, char *argv[])
 {

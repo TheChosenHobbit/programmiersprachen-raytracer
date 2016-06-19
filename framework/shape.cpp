@@ -3,11 +3,13 @@
 
 Shape::Shape():
 	name_{"Shape"},
-	color_{0,0,0}{}
+	color_{0,0,0}{ std::cout << "Shape::Constructor" << std::endl; }
 
 Shape::Shape(std::string const& name, Color const& color):
 	name_{name},
-	color_{color}{}
+	color_{color}{ std::cout << "Shape::Constructor" << std::endl; }
+
+Shape::~Shape(){ std::cout << "Shape::Destructor" << std::endl;  }
 
 std::string const& Shape::getName() const {
 	return name_;

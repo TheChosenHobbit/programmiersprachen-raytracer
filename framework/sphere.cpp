@@ -13,6 +13,8 @@ Sphere::Sphere(std::string name, Color color, glm::vec3 center, float radius):
 	center_{center},
 	radius_{radius}{ std::cout << "Sphere::Constructor" << std::endl; }
 
+Sphere::~Sphere(){ std::cout << "Sphere::Destructor" << std::endl; }
+
 float Sphere::area() const {
 	return 4*M_PI*radius_;
 }
