@@ -3,12 +3,13 @@
 
 #include <glm/vec3.hpp>
 #include <shape.hpp>
+#include "color.hpp"
 
 class Box: public Shape
 {
   public: 
   	Box();
-  	Box(glm::vec3 minimum, glm::vec3 maximum);
+  	Box(std::string name, Color color, glm::vec3 minimum, glm::vec3 maximum);
 
   	glm::vec3 getMin() const;
   	glm::vec3 getMax() const;
