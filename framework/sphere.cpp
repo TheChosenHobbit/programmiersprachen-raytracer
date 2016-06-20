@@ -8,7 +8,7 @@ Sphere::Sphere():
 	center_{0,0,0},
 	radius_{0}{ std::cout << "Sphere::Constructor" << std::endl; }
 
-Sphere::Sphere(std::string name, Color color, glm::vec3 center, float radius):
+Sphere::Sphere(std::string const& name, Color const& color, glm::vec3 const& center, float radius):
 	Shape({name},{color}),
 	center_{center},
 	radius_{radius}{ std::cout << "Sphere::Constructor" << std::endl; }
@@ -38,7 +38,7 @@ std::ostream& Sphere::print(std::ostream& os) const{
 	return os;
 }
 
-bool Sphere::intersect (Ray const& ray, float& distance){
+bool Sphere::intersect (Ray const& ray, float& distance) const{
 	auto v = glm::normalize(ray.direction);
 	return glm::intersectRaySphere(ray.origin, v, center_, radius_*radius_, distance);
 }

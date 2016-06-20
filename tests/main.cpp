@@ -134,6 +134,7 @@ Shape::Destructor 				Shape::Destructor
 
 	Klassendiagramm vs. Objektdiagramm
 	Beides Strukturdiagramme
+	
 
 	grafischen Darstellung (Modellierung) von Klassen, Schnittstellen sowie deren Beziehungen. 
 	Eine Klasse ist in der Objektorientierung ein abstrakter Oberbegriff für die Beschreibung der gemeinsamen Struktur 

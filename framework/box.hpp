@@ -9,7 +9,7 @@ class Box: public Shape
 {
   public: 
   	Box();
-  	Box(std::string name, Color color, glm::vec3 minimum, glm::vec3 maximum);
+  	Box(std::string const& name, Color const& color, glm::vec3 const& minimum, glm::vec3 const& maximum);
 
   	~Box();
 

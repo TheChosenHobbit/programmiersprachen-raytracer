@@ -10,19 +10,19 @@ class Sphere: public Shape
 {
   public:
   	Sphere();
-  	Sphere(std::string name, Color color, glm::vec3 center, float radius);
+  	Sphere(std::string const& name, Color const& color, glm::vec3 const& center, float radius);
 
   	~Sphere();
 
-  	glm::vec3 getCenter() const;
+  	glm::vec3 getCenter() const; //center()
   	float getRadius() const;
 
     float area () const override;
     float volume() const override;
 
-    std::ostream& print(std::ostream&) const override;
+    std::ostream& print(std::ostream& os) const override;
 
-    bool intersect (Ray const&, float&);
+    bool intersect (Ray const& r, float& s) const;
 
 private:
 	glm::vec3 center_;
