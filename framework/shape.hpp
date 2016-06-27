@@ -2,6 +2,7 @@
 #define SHAPE_HPP
 
 #include "color.hpp"
+#include "ray.hpp"
 
 class Shape
 {
@@ -20,6 +21,8 @@ public:
     Color const& getColor() const;
 
     virtual std::ostream& print(std::ostream& os) const;
+
+    virtual bool intersect(Ray const& ray, float& t) const = 0;
 
 protected:
 	std::string name_;

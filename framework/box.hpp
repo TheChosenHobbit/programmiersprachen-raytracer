@@ -20,6 +20,9 @@ class Box: public Shape
     float volume() const override;
 
     std::ostream& print(std::ostream&) const override;
+
+    bool intersect (Ray const& ray, float& t) const override;
+
 private:
 	glm::vec3 min_;
 	glm::vec3 max_;
