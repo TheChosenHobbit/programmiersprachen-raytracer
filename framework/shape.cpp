@@ -1,13 +1,13 @@
 #include "shape.hpp"
-#include "color.hpp"
+#include "material.hpp"
 
 Shape::Shape():
 	name_{"Shape"},
-	color_{0,0,0}{ std::cout << "Shape::Constructor" << std::endl; }
+	material_{Material{}}{ std::cout << "Shape::Constructor" << std::endl; }
 
-Shape::Shape(std::string const& name, Color const& color):
+Shape::Shape(std::string const& name, Material const& material):
 	name_{name},
-	color_{color}{ std::cout << "Shape::Constructor" << std::endl; }
+	material_{material}{ std::cout << "Shape::Constructor" << std::endl; }
 
 Shape::~Shape(){ std::cout << "Shape::Destructor" << std::endl;  }
 
@@ -15,13 +15,13 @@ std::string const& Shape::getName() const {
 	return name_;
 }
 
-Color const& Shape::getColor() const {
-	return color_;
+Material const& Shape::getMaterial() const {
+	return material_;
 }
 
 std::ostream& Shape::print(std::ostream& os) const{
 	os << "Name: " << name_ << std::endl;
-	os << "Color: " << color_.r << ", " << color_.g << ", " << color_.b << ", " << std::endl; 
+	os << "Material: " << material_.name_ << ", " << material_.ka_ << ", " << material_.kd_ << ", " << material_.ks_ << ", " << material_.m_ << std::endl; 
 	return os;
 }
 

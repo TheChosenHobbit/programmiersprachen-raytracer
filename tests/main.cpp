@@ -2,12 +2,14 @@
 #include <catch.hpp>
 #include "sphere.hpp"
 #include "box.hpp"
-#include <cmath>
 #include "shape.hpp"
 #include <iostream>
+#include <cmath>
 #include <glm/glm.hpp>
+#include <glm/vec3.hpp>
 #include <glm/gtx/intersect.hpp>
 
+/*
 TEST_CASE ("Sphere Area and Volume","[Sphere]"){
 	std::cout << "____________________Sphere___________________" << std::endl;
 	Color red {1,0,0};
@@ -82,7 +84,7 @@ TEST_CASE("Statisch und Dynamisch", "[Aufgabe 7]"){
 	dieser Variable bezeichnet. Normalerweise sind bei statisch getypten Sprachen statische und dynamische Klasse einer 
 	Variablen identisch.
 	Im Kontext der Vererbung erlauben statisch typisierte OO-Sprachen, dass die dynamische Klasse einer Variablen
-	eine von der statischen Klasse abgeleitete Klasse sein kann */
+	eine von der statischen Klasse abgeleitete Klasse sein kann 
 }
 
 	TEST_CASE("Virtual Dekonstructor", "[Dekonstructor]"){
@@ -117,7 +119,7 @@ Sphere::Destructor 				Sphere::Destructor
 Shape::Destructor 				Shape::Destructor
 Sphere::Destructor
 Shape::Destructor 				Shape::Destructor
-		*/
+		
 	}
 
 	/* Aufgabe 5.9 
@@ -145,8 +147,36 @@ Shape::Destructor 				Shape::Destructor
 	zeigt den aktuellen Zustand, d. h. die Belegung der Attribute, eines Objektes bzw. einer Klasse. 
 	Da die Anzahl der Attribute sehr groß sein kann, ist es möglich, nur bestimmte Attribute aufzulisten, 
 	welche für den Zweck, den man verdeutlichen möchte ausreichen.
-		*/
+		
 
+*/
+/*
+TEST_CASE("box intersect", "[raytracer]"){
+	Box box;
+	Ray ray {{-2.0f, 1.0f, 0.5f},{2.0f, -0.7f, 0.0f}};
+	float distance;
+	glm::vec3 min = box.getMin();
+	glm::vec3 max = box.getMax();
+
+	REQUIRE(box.intersect(ray, distance));
+	box.intersect(ray, distance);
+	std::cout << "test" << distance << std::endl;
+
+}
+*/
+
+TEST_CASE("box intersect", "[raytracer]"){
+	Box box;
+	Ray ray {{-2.0f, 1.0f, 0.5f},{2.0f, -0.7f, 0.0f}};
+	float distance;
+	glm::vec3 min = box.getMin();
+	glm::vec3 max = box.getMax();
+
+	REQUIRE(box.intersect(ray, distance));
+	box.intersect(ray, distance);
+	std::cout << "hi" << distance << std::endl;
+
+}
 int main(int argc, char *argv[])
 {
   return Catch::Session().run(argc, argv);

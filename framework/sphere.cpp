@@ -2,14 +2,15 @@
 #include <cmath>
 #include <glm/glm.hpp>
 #include <glm/gtx/intersect.hpp>
+#include "material.hpp"
 
 Sphere::Sphere():
-	Shape({"Sphere"},{0.0f,0.0f,0.0f}),
+	Shape({"Sphere"},{Material{}}),
 	center_{0,0,0},
 	radius_{0}{ std::cout << "Sphere::Constructor" << std::endl; }
 
-Sphere::Sphere(std::string const& name, Color const& color, glm::vec3 const& center, float radius):
-	Shape({name},{color}),
+Sphere::Sphere(std::string const& name, Material const& material, glm::vec3 const& center, float radius):
+	Shape({name},{material}),
 	center_{center},
 	radius_{radius}{ std::cout << "Sphere::Constructor" << std::endl; }
 
