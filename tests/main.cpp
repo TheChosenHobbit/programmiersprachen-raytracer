@@ -8,6 +8,7 @@
 #include <glm/glm.hpp>
 #include <glm/vec3.hpp>
 #include <glm/gtx/intersect.hpp>
+#include "scene.hpp"
 
 /*
 TEST_CASE ("Sphere Area and Volume","[Sphere]"){
@@ -150,33 +151,30 @@ Shape::Destructor 				Shape::Destructor
 		
 
 */
-/*
-TEST_CASE("box intersect", "[raytracer]"){
+
+TEST_CASE("Box Intersect", "[Raytracer]"){
+	std::cout << "____________________Raytracer Box Intersect___________________" << std::endl;
 	Box box;
 	Ray ray {{-2.0f, 1.0f, 0.5f},{2.0f, -0.7f, 0.0f}};
 	float distance;
-	glm::vec3 min = box.getMin();
-	glm::vec3 max = box.getMax();
 
 	REQUIRE(box.intersect(ray, distance));
 	box.intersect(ray, distance);
-	std::cout << "test" << distance << std::endl;
-
+	std::cout << "Ausgabe Distance " << distance << std::endl;
 }
-*/
 
-TEST_CASE("box intersect", "[raytracer]"){
-	Box box;
-	Ray ray {{-2.0f, 1.0f, 0.5f},{2.0f, -0.7f, 0.0f}};
-	float distance;
-	glm::vec3 min = box.getMin();
-	glm::vec3 max = box.getMax();
+TEST_CASE("read sdf", "[raytracer]"){
+	std::cout << "____________________Scene Reader___________________" << std::endl;
+	
+	Scene scene = readInput("../material.txt");
+	
+	std::vector<Material> vektor_scene = scene.getMaterials();
 
-	REQUIRE(box.intersect(ray, distance));
-	box.intersect(ray, distance);
-	std::cout << "hi" << distance << std::endl;
-
+	for(std::vector<Material>::iterator it = vektor_scene.begin(); it != vektor_scene.end(); it ++){
+		std::cout << "Ausgabe: " << *it << std::endl;
+	} 
 }
+
 int main(int argc, char *argv[])
 {
   return Catch::Session().run(argc, argv);
