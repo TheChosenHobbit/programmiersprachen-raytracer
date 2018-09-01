@@ -2,6 +2,7 @@
 #include <iostream>
 #include <cmath>
 #include "material.hpp"
+#include "ray.hpp"
 
 Box::Box():
 	Shape({"Box"},{Material{}}),
@@ -46,18 +47,19 @@ std::ostream& Box::print(std::ostream& os) const{
 	return os;
 }
 
-bool Box::intersect (Ray const& ray, float& dista) const{
+bool Box::intersect (Ray const& ray, float& dista, glm::vec3& intersection) const{
 	float tnear,tfar;
 	float tnear_x,tnear_y,tnear_z;
+	float t0, t1, t_final;
 	dista = -1;
 
 	if (ray.direction.x != 0.0)
 	{
-		float t0 = (min_.x - ray.origin.x) / ray.direction.x;
-		float t1 = (max_.x - ray.origin.x) / ray.direction.x;
-		tnear_x = std::min(t0, t1);
-		tfar = std::max(t0,t1);
-		tnear = std::min(t0,t1);
+		t0 = (min_.x - ray.origin.x) / ray.direction.x; // t zu unten links
+		t1 = (max_.x - ray.origin.x) / ray.direction.x; // t zu unten rechts
+		tnear_x = std::min(t0, t1); //näheres t der x-Achse
+		tnear = std::min(t0,t1); // t zum minimum
+		tfar = std::max(t0,t1); // t zum maximum
 	}
 	else 
 	{
@@ -68,11 +70,11 @@ bool Box::intersect (Ray const& ray, float& dista) const{
 
 	if (ray.direction.y != 0.0)
 	{
-		float t0 = (min_.y - ray.origin.y) / ray.direction.y;
-		float t1 = (max_.y - ray.origin.y) / ray.direction.y;
+		t0 = (min_.y - ray.origin.y) / ray.direction.y;
+		t1 = (max_.y - ray.origin.y) / ray.direction.y;
 		tnear_y = std::min(t0, t1);
-		float tnear = std::max(tnear, std::min(t0,t1));
-		float tfar = std::min(tfar, std::max(t0,t1));
+		tnear = std::max(tnear, std::min(t0,t1)); // näheres t zu einem minimum
+		tfar = std::min(tfar, std::max(t0,t1)); // näheres t zu einem maximum
 		if (tnear > tfar)
 		{
 			return false;
@@ -85,26 +87,35 @@ bool Box::intersect (Ray const& ray, float& dista) const{
 		}
 	}
 
-	if (ray.direction.z != 0.0)
+	if (ray.direction.z != 0.0) //einzelne Abfragen?
 	{
-		float t0 = (min_.z - ray.origin.z) / ray.direction.z;
-		float t1 = (max_.z - ray.origin.z) / ray.direction.z;
+		t0 = (min_.z - ray.origin.z) / ray.direction.z;
+		t1 = (max_.z - ray.origin.z) / ray.direction.z;
 		tnear_z = std::min(t0, t1);
 		tnear = std::max(tnear, std::min(t0,t1));
-		tfar = std::min(tfar, std::max(t0,t1));
-		if (tnear > tfar)
-		{
-			return false;
-		}
+		tfar = std::min(tfar, std::max(t0,t1)); 
 	}
 	else 
 	{
 		if(min_.z > ray.origin.z || max_.z < ray.origin.z) {return false;}
 	}
 
+	if (tnear < 0){
 
-	dista = tnear*sqrt(ray.direction.x*ray.direction.x +
-					      ray.direction.y*ray.direction.y +
-					      ray.direction.z*ray.direction.z);
+		if(tfar < 0){
+
+			return false;
+
+		}
+
+		t_final = tfar;
+
+	}
+	else{
+		t_final = tnear;
+	}
+
+	intersection = ray.origin + ray.direction * t_final;
+
 	return true;
 }
