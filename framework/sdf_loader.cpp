@@ -20,6 +20,10 @@ Scene sdf_loader::load_scene(std::string filename) const {
 
 	if(file.good()){
 		while(file >> word){  //iteriert über die mit Leerzeichen getrennten "Wörter" im file
+			if(word == "#"){ // ignoriert Kommentare und geht zum nächsten
+				file >> word;	
+			}
+
 			if(word == "camera"){
 				file >> name; // nach der Klasse des Objektes folgt im file der Name
 				file >> word; // Attribut nach dem Namen
@@ -69,8 +73,67 @@ Scene sdf_loader::load_scene(std::string filename) const {
 					s.cam = c;
 				}
 			}
+			/*
+			if(word == "material"){
+				float r,g,b;
+				file << name;
+				if( s.materials_.end(word) == s.materials_.end()){
+					//do stuff
+					//not tested yet
+					s_stream.clear();
+		 			file >> word;
+		 			s_stream << word << ' ';
+		 			file >> word;
+		 			s_stream << word << ' ';
+		 			file >> word;
+		 			s_stream << word;
+		 			s_stream >> r >> g >> b;
+		 			Color ka(r,g,b);
+		 			s_stream.clear();
+		 			
+		 			// kd
+		 			file >> word;
+		 			s_stream << word << ' ';
+		 			file >> word;
+		 			s_stream << word << ' ';
+		 			file >> word;
+		 			s_stream << word;
+		 			s_stream >> r >> g >> b;
+		 			Color kd(r,g,b);
+		 			s_stream.clear();
+
+		 			// ks
+		 			file >> word;
+		 			s_stream << word << ' ';
+		 			file >> word;
+		 			s_stream << word << ' ';
+		 			file >> word;
+		 			s_stream << word;
+		 			s_stream >> r >> g >> b;
+		 			Color ks(r,g,b);
+		 			s_stream.clear();
+
+		 			float m;
+		 			file >> word;
+		 			s_stream << word << ' ';
+		 			file >> word;
+		 			s_stream << word << ' ';
+		 			file >> word;
+		 			s_stream << word;
+		 			s_stream >> m;
+		 			s_stream.clear();
+
+		 			Material mat{name, ka, kd, ks, m};
+		 			s.materials_.push_back(mat);
+		 			
+				}
+			}
+			*/
 
 			//nächstes Element
 		}
+	}
+	else {
+		std::cout << "File is not good" << std::endl;
 	}
 }
