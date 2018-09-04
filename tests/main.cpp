@@ -152,6 +152,7 @@ Shape::Destructor 				Shape::Destructor
 
 */
 
+/*
 TEST_CASE("Box Intersect", "[Raytracer]"){
 	std::cout << "____________________Raytracer Box Intersect___________________" << std::endl;
 	Box box;
@@ -161,7 +162,7 @@ TEST_CASE("Box Intersect", "[Raytracer]"){
 	REQUIRE(box.intersect(ray, distance));
 	box.intersect(ray, distance);
 	std::cout << "Ausgabe Distance " << distance << std::endl;
-}
+}*/
 
 TEST_CASE("read sdf", "[raytracer]"){
 	std::cout << "____________________Scene Reader___________________" << std::endl;

@@ -1,5 +1,5 @@
-#ifndef BUW_SDF_LOADER_HPP
-#define BUW_SDF_LOADER_HPP
+#ifndef SDF_LOADER_HPP
+#define SDF_LOADER_HPP
 
 #include <iostream>
 #include <fstream>
@@ -11,15 +11,10 @@
 #include "box.hpp"
 #include "camera.hpp"
 #include "color.hpp"
-#include "cone.hpp"
-#include "cylinder.hpp"
-#include "light_source.hpp"
 #include "material.hpp"
-#include "renderer_data.hpp"
 #include "scene.hpp"
 #include "shape.hpp"
 #include "sphere.hpp"
-#include "triangle.hpp"
 
 using namespace std;
 
