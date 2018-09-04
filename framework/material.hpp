@@ -27,8 +27,6 @@ struct Material
   Color ks_;
   float m_;
 
-
-
   friend std::ostream& operator<<(std::ostream& os, Material const& mat)
   {
     os << mat.name_ << "\nAmbient: " << mat.ka_ << "Diffuse:" << mat.kd_ << "Reflection:" << mat.ks_ << mat.m_ << std::endl;
@@ -36,5 +34,7 @@ struct Material
   }
 
 };
+
+
 
 #endif //#define BUW_MATERIAL_HPP
