@@ -6,6 +6,7 @@
 #include <string>
 #include <vector>
 #include "material.hpp"
+#include "camera.hpp"
 
 class Scene
 {
@@ -16,6 +17,7 @@ public :
 	void readInput(std::string);
 	void addMaterial (Material const&);
 	std::vector<Material> getMaterials();
+	Camera cam;
 
 private :
 	std::vector<Material> materials_;

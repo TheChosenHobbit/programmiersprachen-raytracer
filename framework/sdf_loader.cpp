@@ -10,13 +10,13 @@ sdf_loader::sdf_loader():
 
 sdf_loader::~sdf_loader(){}
 
-scene sdf_loader::load_scene(std::string filename) const {
+Scene sdf_loader::load_scene(std::string filename) const {
 	ifstream file(filename, ios::in);
-	scene s{};
+	Scene s{};
 	std::string word = " ";
 	std::string name = " ";
 	std::stringstream s_stream;
-	std::map<std::string; std::shared_ptr<shape>> shape_map;
+	//std::map<std::string, std::shared_ptr<Shape>> shape_map;
 
 	if(file.good()){
 		while(file >> word){  //iteriert über die mit Leerzeichen getrennten "Wörter" im file
