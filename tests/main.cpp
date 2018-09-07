@@ -9,6 +9,7 @@
 #include <glm/vec3.hpp>
 #include <glm/gtx/intersect.hpp>
 #include "scene.hpp"
+#include "sdf_loader.hpp"
 
 /*
 TEST_CASE ("Sphere Area and Volume","[Sphere]"){
@@ -163,7 +164,7 @@ TEST_CASE("Box Intersect", "[Raytracer]"){
 	box.intersect(ray, distance);
 	std::cout << "Ausgabe Distance " << distance << std::endl;
 }*/
-
+/*
 TEST_CASE("read sdf", "[raytracer]"){
 	std::cout << "____________________Scene Reader___________________" << std::endl;
 	
@@ -174,6 +175,16 @@ TEST_CASE("read sdf", "[raytracer]"){
 	for(std::vector<Material>::iterator it = vektor_scene.begin(); it != vektor_scene.end(); it ++){
 		std::cout << "Ausgabe: " << *it << std::endl;
 	} 
+}
+*/
+TEST_CASE("Sdf_loader_camera", "[sdf_loader]"){
+	int test = 10;
+	sdf_loader loader{"./camera.txt"};
+	Scene s{};
+	s = loader.load_scene("./camera.txt");
+
+	
+	std::cout << s.cam.get_name() << " " << s.cam.get_angle() << std::endl;
 }
 
 int main(int argc, char *argv[])

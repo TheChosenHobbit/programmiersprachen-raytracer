@@ -23,7 +23,7 @@ private :
 	std::vector<Material> materials_;
 
 };
-
+/*
 Material createMaterial(std::ifstream& line){
 	std::string name;
 	std::string word;
@@ -104,5 +104,5 @@ Scene readInput(std::string input){
 
 	return sc;
 }
-
+*/
 #endif

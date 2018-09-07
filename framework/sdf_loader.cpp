@@ -133,7 +133,8 @@ Scene sdf_loader::load_scene(std::string filename) const {
 			//nächstes Element
 		}
 	}
-	else {
-		std::cout << "File is not good" << std::endl;
+	else{
+ 		std::cout << "bad file" << std::endl;
 	}
+		return s;
 }
