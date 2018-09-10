@@ -189,7 +189,7 @@ TEST_CASE("Sdf_loader_camera", "[sdf_loader]"){
 	s = loader.load_scene("../../../camera.txt");
 
 	
-	std::cout << s.camera.get_name() << " " << s.camera.get_angle() << std::endl;
+	std::cout << s.camera.get_name() << " + " << s.camera.get_angle() << std::endl;
 }
 
 

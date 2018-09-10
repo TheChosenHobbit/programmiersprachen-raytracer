@@ -57,6 +57,7 @@ Scene sdf_loader::load_scene(std::string filename){
                     std::string name;
                     float angle, posx, posy, posz, upx, upy, upz;
                     ss >> name;
+                    ss >> angle;
                     ss >> posx;
                     ss >> posy;
                     ss >> posz;
@@ -65,7 +66,7 @@ Scene sdf_loader::load_scene(std::string filename){
                     ss >> upz;
                     glm::vec3 pos {posx, posy, posz};
                     glm::vec3 up {upx, upy, upz};
-                    ss >> angle;
+                    
 
                     Camera cam {name, angle, pos, up}; //ohne direction
                     //std::cout << cam;
