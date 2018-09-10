@@ -28,13 +28,9 @@ public:
 
 protected:
 	std::string name_;
-<<<<<<< HEAD
 	Material material_;
-=======
-	std::string material_;
     glm::mat4 world_transformation_;
     glm::mat4 world_transformation_inv_; 
->>>>>>> 54e24ca1884c7e5054ced8ad9bcc572637e2aebb
 /*Alle Einträge in diesem Bereich können von der Basisklasse 
 und allen abgeleiteten Klassen gesehen und manipuliert werden 
 – allerdings nicht von außerhalb.*/
