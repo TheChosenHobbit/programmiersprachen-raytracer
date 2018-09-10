@@ -77,7 +77,7 @@ Scene sdf_loader::load_scene(std::string filename) const {
 			if(word == "material"){
 				float r,g,b;
 				file << name;
-				if( s.materials_.end(word) == s.materials_.end()){
+				if( s.materials.find(name) == s.materials.end()){
 					//do stuff
 					//not tested yet
 					s_stream.clear();
@@ -123,8 +123,8 @@ Scene sdf_loader::load_scene(std::string filename) const {
 		 			s_stream >> m;
 		 			s_stream.clear();
 
-		 			Material mat{name, ka, kd, ks, m};
-		 			s.materials_.push_back(mat);
+			 		Material mat{name, ka, kd, ks, m};
+					s.material[name] = mat;
 		 			
 				}
 			}

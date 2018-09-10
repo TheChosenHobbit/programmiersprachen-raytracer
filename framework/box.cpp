@@ -3,13 +3,14 @@
 #include <cmath>
 #include "material.hpp"
 #include "ray.hpp"
+#include "shape.hpp"
 
 Box::Box():
-	Shape({"Box"},{Material{}}),
+	Shape({"Box"},{"Material"}),
 	min_{0,0,0},
 	max_{1,1,1}{ std::cout << "Box::Constructor" << std::endl; }
 
-Box::Box(std::string const& name, Material const& material, glm::vec3 const& min, glm::vec3 const& max):
+Box::Box(std::string const& name, std::string material, glm::vec3 const& min, glm::vec3 const& max):
 	Shape({name},{material}),
 	min_{min},
 	max_{max}{ std::cout << "Box::Constructor" << std::endl;}

@@ -10,6 +10,8 @@
 #include <glm/gtx/intersect.hpp>
 #include "scene.hpp"
 #include "sdf_loader.hpp"
+#include "material.hpp"
+
 
 /*
 TEST_CASE ("Sphere Area and Volume","[Sphere]"){
@@ -51,6 +53,7 @@ TEST_CASE("Print","[Ausgabe]"){
 	Box b {{"Box"},{red}, {1,1,1}, {2,2,2}};
 	std::cout << b;
 }
+
 
 TEST_CASE("intersectRaySphere","[intersect]"){
 	std::cout << "____________________intersect___________________" << std::endl;
@@ -186,6 +189,23 @@ TEST_CASE("Sdf_loader_camera", "[sdf_loader]"){
 	
 	std::cout << s.cam.get_name() << " " << s.cam.get_angle() << std::endl;
 }
+/*
+TEST_CASE("Test Material","[Material Test]"){
+	std::cout << "____________________Test Material___________________" << std::endl;
+
+	Color red(255, 0, 0);
+	glm::vec3 position(0.0, 0.0, 0.0);
+	std::shared_ptr<Sphere> s1 = std::make_shared<Sphere>("sphere0", "red", position, 1.2f);
+
+
+	//std::shared_ptr<Box> s1 = std::make_shared<Box>("box", "red", {1,1,1}, {2,2,2});
+	//std::shared_ptr<Shape> s2 = std::make_shared<Sphere>("sphere1", red, position, 1.2f);
+
+//	Shape s{{"Boxi"}, {"Material"}};
+//	Box box {s, {1,1,1}, {2,2,2}};
+//	s1->print(std::cout);
+}
+*/
 
 int main(int argc, char *argv[])
 {
