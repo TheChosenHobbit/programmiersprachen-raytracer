@@ -4,13 +4,12 @@
 #include <glm/vec3.hpp>
 #include <shape.hpp>
 #include "material.hpp"
-#include <string>
 
 class Box: public Shape
 {
   public: 
   	Box();
-  	Box(std::string const& name, std::string material, glm::vec3 const& minimum, glm::vec3 const& maximum);
+  	Box(std::string const& name, Material const& material, glm::vec3 const& minimum, glm::vec3 const& maximum);
 
   	~Box();
 

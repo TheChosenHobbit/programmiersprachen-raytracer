@@ -11,7 +11,7 @@ class Shape
 public: 
 
 	Shape();
-	Shape(std::string const& name, std::string material);
+	Shape(std::string const& name, Material const& material);
 
 	/*virtual*/ ~Shape();
 
@@ -19,7 +19,7 @@ public:
     virtual float volume() const = 0;
 
     std::string const& getName() const;
-    std::string const& getMaterial() const;
+    Material const& getMaterial() const;
 
     virtual std::ostream& print(std::ostream& os) const;
 
@@ -27,7 +27,7 @@ public:
 
 protected:
 	std::string name_;
-	std::string material_;
+	Material material_;
 /*Alle Einträge in diesem Bereich können von der Basisklasse 
 und allen abgeleiteten Klassen gesehen und manipuliert werden 
 – allerdings nicht von außerhalb.*/

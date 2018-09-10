@@ -5,11 +5,11 @@ using namespace std;
 sdf_loader::sdf_loader(std::string filename):
 	filename_{filename}{}
 
-sdf_loader::sdf_loader():
-	filename_{""}{}
+sdf_loader::sdf_loader()
+:	filename_{""}{}
 
-sdf_loader::~sdf_loader(){}
-
+sdf_loader::~sdf_loader(){
+}
 Scene sdf_loader::load_scene(std::string filename) const {
 	ifstream file(filename, ios::in);
 	Scene s{};
@@ -18,13 +18,16 @@ Scene sdf_loader::load_scene(std::string filename) const {
 	std::stringstream s_stream;
 	//std::map<std::string, std::shared_ptr<Shape>> shape_map;
 
+
 	if(file.good()){
 		while(file >> word){  //iteriert über die mit Leerzeichen getrennten "Wörter" im file
-			if(word == "#"){ // ignoriert Kommentare und geht zum nächsten
-				file >> word;	
+			if(word == "#") { // ignoriert Kommentare und geht zum nächsten
+				file >> word;
+				std::cout << "testing" << std::endl;
 			}
 
-			if(word == "camera"){
+			//Camera
+			else if(word == "camera"){
 				file >> name; // nach der Klasse des Objektes folgt im file der Name
 				file >> word; // Attribut nach dem Namen
 				s_stream << word; // Umwandlung ist notwendig um den Winkel als float zu extrahieren
@@ -73,13 +76,14 @@ Scene sdf_loader::load_scene(std::string filename) const {
 					s.cam = c;
 				}
 			}
+			//Material
 			/*
-			if(word == "material"){
+			else if(word.compare("material") == 0){
 				float r,g,b;
-				file << name;
-				if( s.materials.find(name) == s.materials.end()){
-					//do stuff
-					//not tested yet
+				file >> name;
+				if( s.material.find(name) == s.material.end()){
+
+					//ka
 					s_stream.clear();
 		 			file >> word;
 		 			s_stream << word << ' ';
@@ -129,7 +133,6 @@ Scene sdf_loader::load_scene(std::string filename) const {
 				}
 			}
 			*/
-
 			//nächstes Element
 		}
 	}

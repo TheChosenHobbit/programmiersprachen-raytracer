@@ -5,13 +5,12 @@
 #include <shape.hpp>
 #include "material.hpp"
 #include "ray.hpp"
-#include <string>
 
 class Sphere: public Shape
 {
   public:
   	Sphere();
-  	Sphere(std::string const& name, std::string material, glm::vec3 const& center, float radius);
+  	Sphere(std::string const& name, Material const& material, glm::vec3 const& center, float radius);
 
   	~Sphere();
 

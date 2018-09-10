@@ -5,11 +5,11 @@
 #include "material.hpp"
 
 Sphere::Sphere():
-	Shape({"Sphere"},{"Material"}),
+	Shape({"Sphere"},{Material{}}),
 	center_{0,0,0},
 	radius_{0}{ std::cout << "Sphere::Constructor" << std::endl; }
 
-Sphere::Sphere(std::string const& name, std::string material, glm::vec3 const& center, float radius):
+Sphere::Sphere(std::string const& name, Material const& material, glm::vec3 const& center, float radius):
 	Shape({name},{material}),
 	center_{center},
 	radius_{radius}{ std::cout << "Sphere::Constructor" << std::endl; }

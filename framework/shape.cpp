@@ -1,11 +1,10 @@
 #include "shape.hpp"
-#include "material.hpp"
 
 Shape::Shape():
 	name_{"Shape"},
-	material_{""}{ std::cout << "Shape::Constructor" << std::endl; }
+	material_{Material{}}{ std::cout << "Shape::Constructor" << std::endl; }
 
-Shape::Shape(std::string const& name, std::string material):
+Shape::Shape(std::string const& name, Material const& material):
 	name_{name},
 	material_{material}{ std::cout << "Shape::Constructor" << std::endl; }
 
@@ -15,13 +14,14 @@ std::string const& Shape::getName() const {
 	return name_;
 }
 
-std::string const& Shape::getMaterial() const {
+Material const& Shape::getMaterial() const {
 	return material_;
 }
 
 std::ostream& Shape::print(std::ostream& os) const{
 	os << "Name: " << name_ << std::endl;
-	os << "Material: " << material_ << std::endl; 
+	os << "Material: " << material_.name_ << ", " << material_.ka_ << ", " << material_.kd_ 
+	<< ", " << material_.ks_ << ", " << material_.m_ << std::endl; 
 	return os;
 }
 

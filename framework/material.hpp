@@ -5,28 +5,34 @@
 #include "color.hpp"
 #include <string>
 
-class Material{
-  public:
-    Material();
-    Material(std::string name, Color const& ka, Color const& kd, Color const& ks, float m);
-    ~Material();
-    
-    std::string const& get_name()const;
-    Color const& get_ka() const;
-    Color const& get_kd() const;
-    Color const& get_ks() const;
-    float get_m() const;
+struct Material
+ {
+   Material() :
+     name_(std::string("Material")), 
+     ka_({0.0f, 0.0f, 0.0f}), 
+     kd_({0.0f, 0.0f, 0.0f}),
+     ks_({0.0f, 0.0f, 0.0f}),
+     m_(0.0f) {}
 
-    friend std::ostream& operator<<(std::ostream& os, 
-      Material const& mat);
+   Material(std::string const& name, Color const& ka, Color const& kd, Color const& ks,  float m) :
+     name_(name), 
+     ka_(ka), 
+     kd_(kd),
+     ks_(ks),
+     m_(m) {}
+
+   std::string name_;
+   Color ka_;
+   Color kd_;
+   Color ks_;
+   float m_;
 
 
-  private:
-    std::string name_;
-    Color ka_;
-    Color kd_;
-    Color ks_;
-    float m_;
+   friend std::ostream& operator<<(std::ostream& os, Material const& mat)
+   {
+     os << mat.name_ << "\nAmbient: " << mat.ka_ << "Diffuse:" << mat.kd_ << "Reflection:" << mat.ks_ << mat.m_ << std::endl;
+     return os;
+   }
 
 };
 
