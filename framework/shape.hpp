@@ -4,6 +4,7 @@
 #include "material.hpp"
 #include "ray.hpp"
 #include <string>
+#include "glm/glm.hpp"
 
 class Shape
 {
@@ -28,6 +29,8 @@ public:
 protected:
 	std::string name_;
 	std::string material_;
+    glm::mat4 world_transformation_;
+    glm::mat4 world_transformation_inv_; 
 /*Alle Einträge in diesem Bereich können von der Basisklasse 
 und allen abgeleiteten Klassen gesehen und manipuliert werden 
 – allerdings nicht von außerhalb.*/

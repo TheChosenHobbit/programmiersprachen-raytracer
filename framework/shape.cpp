@@ -3,7 +3,9 @@
 
 Shape::Shape():
 	name_{"Shape"},
-	material_{""}{ std::cout << "Shape::Constructor" << std::endl; }
+	material_{""},
+	world_transformation_{glm::mat4 {1.0f}},
+	world_transformation_inv_{glm::mat4 {1.0f}}{}
 
 Shape::Shape(std::string const& name, std::string material):
 	name_{name},
