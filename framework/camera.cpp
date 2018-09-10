@@ -14,7 +14,14 @@ Camera::Camera(std::string name, float fov_x, glm::vec3 const& position,
 	eye_{position},
 	dir_{direction},
 	up_{up}{}
-	
+
+Camera::Camera(std::string name, float fov_x, glm::vec3 const& position, glm::vec3 const& up) :
+	name_{name},
+	fov_x_{fov_x},
+	eye_{position},
+	up_{up},
+	dir_{0.0,0.0,-1}{} //direction
+		
 Camera::Camera():
 	name_{""},
 	fov_x_{0.0f},

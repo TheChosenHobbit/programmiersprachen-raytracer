@@ -1,16 +1,89 @@
 #include "sdf_loader.hpp"
 
-using namespace std;
+sdf_loader::sdf_loader():
+	filename_{""}{}
 
 sdf_loader::sdf_loader(std::string filename):
 	filename_{filename}{}
 
-sdf_loader::sdf_loader()
-:	filename_{""}{}
+sdf_loader::~sdf_loader(){}
 
-sdf_loader::~sdf_loader(){
+Scene sdf_loader::load_scene(std::string filename){
+	Scene s;
+	std::string line;
+    std::ifstream myfile (filename);
+    std::stringstream ss;
+    std::string keyword;
+
+    if(myfile.is_open())
+    {
+    	while(getline(myfile,line))
+    	{
+    		ss << line;
+    		ss >> keyword;
+
+    		if(keyword == "#")
+    		{
+    			continue;
+    		}
+
+    		if(keyword == "define")
+    		{
+    			ss>>keyword;
+    			if(keyword == "material")
+    			{
+    				Material mat;
+    				ss >> mat.name_;
+    				ss >> mat.ka_.r;
+                    ss >> mat.ka_.g;
+                    ss >> mat.ka_.b;
+
+                    ss >> mat.kd_.r;
+                    ss >> mat.kd_.g;
+                    ss >> mat.kd_.b;
+
+                    ss >> mat.ks_.b;
+                    ss >> mat.ks_.r;
+                    ss >> mat.ks_.g;
+
+                    ss >> mat.m_;
+
+                    s.materials.insert({mat.name_, mat});
+					//std::cout << mat;
+    			}
+
+
+    			else if(keyword == "camera"){
+                    std::string name;
+                    float angle, posx, posy, posz, upx, upy, upz;
+                    ss >> name;
+                    ss >> posx;
+                    ss >> posy;
+                    ss >> posz;
+                    ss >> upx;
+                    ss >> upy;
+                    ss >> upz;
+                    glm::vec3 pos {posx, posy, posz};
+                    glm::vec3 up {upx, upy, upz};
+                    ss >> angle;
+
+                    Camera cam {name, angle, pos, up}; //ohne direction
+                    //std::cout << cam;
+                    s.camera = cam;
+                }
+    		}
+    	}
+    	myfile.close();
+    }
+    else
+    {
+    	std::cout << "Unable to open the file";
+    }
+    return s;
 }
-Scene sdf_loader::load_scene(std::string filename) const {
+
+/*
+Scene sdf_loader::load_scene(std::string const& filename){
 	ifstream file(filename, ios::in);
 	Scene s{};
 	std::string word = " ";
@@ -77,7 +150,6 @@ Scene sdf_loader::load_scene(std::string filename) const {
 				}
 			}
 			//Material
-			/*
 			else if(word.compare("material") == 0){
 				float r,g,b;
 				file >> name;
@@ -132,7 +204,7 @@ Scene sdf_loader::load_scene(std::string filename) const {
 		 			
 				}
 			}
-			*/
+			
 			//nächstes Element
 		}
 	}
@@ -140,4 +212,4 @@ Scene sdf_loader::load_scene(std::string filename) const {
  		std::cout << "bad file" << std::endl;
 	}
 		return s;
-}
+}*/

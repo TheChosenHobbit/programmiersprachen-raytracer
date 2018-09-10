@@ -180,15 +180,18 @@ TEST_CASE("read sdf", "[raytracer]"){
 	} 
 }
 */
+
 TEST_CASE("Sdf_loader_camera", "[sdf_loader]"){
-	int test = 10;
-	sdf_loader loader{"./camera.txt"};
+	std::cout << "____________________Sdf_loader_camera___________________" << std::endl;
+	sdf_loader loader;
 	Scene s{};
-	s = loader.load_scene("./camera.txt");
+	//s = loader.load_scene("/home/IN/xavo6170/Git/programmiersprachen-raytracer/camera.txt");
+	s = loader.load_scene("../../../camera.txt");
 
 	
-	std::cout << s.cam.get_name() << " " << s.cam.get_angle() << std::endl;
+	std::cout << s.camera.get_name() << " " << s.camera.get_angle() << std::endl;
 }
+
 
 int main(int argc, char *argv[])
 {

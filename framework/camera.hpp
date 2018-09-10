@@ -19,6 +19,7 @@ class Camera {
 		Camera(std::string name, float fov_x);
 		Camera(std::string name, float fov_x, glm::vec3 const& eye_, 
 			   glm::vec3 const& dir_, glm::vec3 const& up_);
+		Camera(std::string name, float fov_x, glm::vec3 const& eye_, glm::vec3 const& up);
 		Camera();
 		~Camera();
 

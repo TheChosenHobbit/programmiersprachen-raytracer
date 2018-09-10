@@ -1,30 +1,38 @@
 #ifndef SCENE_HPP
 #define SCENE_HPP
 
-#include <iostream>
-#include <fstream>
 #include <string>
 #include <vector>
+#include <map>
 #include "material.hpp"
 #include "camera.hpp"
 
+
+
+struct Scene
+{
+	Camera camera;
+	std::map<std::string,Material> materials;
+};
+
+#endif //#define SCENE_HPP
+/*
 class Scene
 {
 	
 public :
 		
 	Scene(){}
-	/*
 	void readInput(std::string);
 	void addMaterial (Material const&);
-	std::vector<Material> getMaterials();*/
+	std::vector<Material> getMaterials();
 	Camera cam;
 
 private :
 	std::vector<Material> materials_;
 
 };
-/*
+
 Material createMaterial(std::ifstream& line){
 	std::string name;
 	std::string word;
@@ -106,4 +114,3 @@ Scene readInput(std::string input){
 	return sc;
 }
 */
-#endif

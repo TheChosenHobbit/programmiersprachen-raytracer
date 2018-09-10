@@ -16,20 +16,17 @@
 #include "shape.hpp"
 #include "sphere.hpp"
 
-using namespace std;
-
 class  sdf_loader
 {
-public:
-	sdf_loader();
-	sdf_loader(std::string filename);
-	~sdf_loader();
+	public:
+		sdf_loader();
+		sdf_loader(std::string filename);
+		~sdf_loader();
 
-	Scene load_scene(std::string filename) const;
-	std::string get_file() const;
+		Scene load_scene(std::string filename);
 
-private:
-	std::string filename_;
+	private:
+		std::string filename_;
 };
 
 #endif // #ifndef SDF_LOADER_HPP
