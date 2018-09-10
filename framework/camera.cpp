@@ -55,3 +55,13 @@ Camera& Camera::operator= (Camera const& rhs){
 	up_ = rhs.get_up();
 	return *this;
 }
+
+std::ostream& operator<<(std::ostream& os, Camera const& c)
+  {
+    os << "Camera: \n"
+       << "Name: " << c.name_ << "\n"
+       << "Pos: (" << c.eye_.x << "," << c.eye_.y << "," << c.eye_.z << ")\n"
+       << "Up: (" << c.up_.x << "," << c.up_.y << "," << c.up_.z << ")\n"
+       << "Winkel: "<< c.fov_x_ << "\n\n";
+    return os;
+  }

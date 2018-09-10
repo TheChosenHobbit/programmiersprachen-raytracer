@@ -24,6 +24,7 @@ class Camera {
 		~Camera();
 
 		Camera& operator= (Camera const& rhs);
+		friend std::ostream& operator<<(std::ostream& os, Camera const& c);
 
 		std::string get_name() const;
 		float get_angle() const;

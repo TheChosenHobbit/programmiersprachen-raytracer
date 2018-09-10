@@ -13,6 +13,7 @@ public:
 
 	Shape();
 	Shape(std::string const& name, Material const& material);
+    
 
 	/*virtual*/ ~Shape();
 

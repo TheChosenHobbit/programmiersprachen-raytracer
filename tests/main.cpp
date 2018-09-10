@@ -11,6 +11,7 @@
 #include "scene.hpp"
 #include "sdf_loader.hpp"
 #include "material.hpp"
+#include "light.hpp"
 
 
 /*
@@ -185,14 +186,27 @@ TEST_CASE("Sdf_loader_camera", "[sdf_loader]"){
 	std::cout << "____________________Sdf_loader_camera___________________" << std::endl;
 	sdf_loader loader;
 	Scene s{};
-	
+	std::map<std::string, Material> mat;
+
+
 	//s = loader.load_scene("/home/IN/xavo6170/Git/programmiersprachen-raytracer/camera.txt");
 	s = loader.load_scene("../../../camera.txt");
 
+	for(std::map<std::string, Material>::iterator it = mat.begin();
+	 it != mat.end(); ++it){
+	 	std::cout << it->second << std::endl;
+	}
 	
 	std::cout << s.camera.get_name() << " + " << s.camera.get_angle() << std::endl;
 }
 
+/*
+TEST_CASE("Lights", "[Light]"){
+	std::cout << "____________________Light test___________________" << std::endl;
+
+	//Light l{};
+	std::cout << "blablabla" << std::endl;
+}*/
 
 int main(int argc, char *argv[])
 {

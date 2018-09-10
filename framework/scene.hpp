@@ -6,16 +6,27 @@
 #include <map>
 #include "material.hpp"
 #include "camera.hpp"
+#include "light.hpp"
 
 
 
 struct Scene
 {
+	//Shapes (Box Sphere)
 	Camera camera;
 	std::map<std::string,Material> materials;
+	std::vector<Light> lights;
 };
 
 #endif //#define SCENE_HPP
+
+
+
+
+
+
+
+
 /*
 class Scene
 {

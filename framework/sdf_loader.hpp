@@ -15,6 +15,7 @@
 #include "scene.hpp"
 #include "shape.hpp"
 #include "sphere.hpp"
+#include "light.hpp"
 
 class  sdf_loader
 {

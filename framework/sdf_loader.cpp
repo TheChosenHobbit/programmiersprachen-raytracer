@@ -72,6 +72,27 @@ Scene sdf_loader::load_scene(std::string filename){
                     //std::cout << cam;
                     s.camera = cam;
                 }
+
+                else if(keyword == "light"){
+                    std::string name;
+                    float pos_x, pos_y, pos_z, ld_r, ld_g, ld_b, brightness;
+                    ss >> name;
+                    ss >> pos_x;
+                    ss >> pos_y;
+                    ss >> pos_z;
+                    glm::vec3 pos{pos_x, pos_y, pos_z};
+                    ss >> ld_r;
+                    ss >> ld_g;
+                    ss >> ld_b;
+                    Color ld{ld_r, ld_g, ld_b};
+                    ss >> brightness;
+
+                    //TODO klappt das so?
+                    Light light(name, pos, ld, brightness);
+                    s.lights.push_back(light);
+
+                    std::cout << "light: " << ld << "\n";
+                }
     		}
     	}
     	myfile.close();
