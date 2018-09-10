@@ -2,7 +2,13 @@
 
 Shape::Shape():
 	name_{"Shape"},
+<<<<<<< HEAD
 	material_{Material{}}{ std::cout << "Shape::Constructor" << std::endl; }
+=======
+	material_{""},
+	world_transformation_{glm::mat4 {1.0f}},
+	world_transformation_inv_{glm::mat4 {1.0f}}{}
+>>>>>>> 54e24ca1884c7e5054ced8ad9bcc572637e2aebb
 
 Shape::Shape(std::string const& name, Material const& material):
 	name_{name},

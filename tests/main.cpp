@@ -182,10 +182,16 @@ TEST_CASE("read sdf", "[raytracer]"){
 */
 
 TEST_CASE("Sdf_loader_camera", "[sdf_loader]"){
+<<<<<<< HEAD
 	std::cout << "____________________Sdf_loader_camera___________________" << std::endl;
 	sdf_loader loader;
 	Scene s{};
 	//s = loader.load_scene("/home/IN/xavo6170/Git/programmiersprachen-raytracer/camera.txt");
+=======
+	int test = 10;
+	sdf_loader loader{"../../../camera.txt"};
+	Scene s{};
+>>>>>>> 54e24ca1884c7e5054ced8ad9bcc572637e2aebb
 	s = loader.load_scene("../../../camera.txt");
 
 	

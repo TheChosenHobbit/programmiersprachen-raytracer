@@ -25,11 +25,11 @@ public :
 	Scene(){}
 	void readInput(std::string);
 	void addMaterial (Material const&);
-	std::vector<Material> getMaterials();
+	//std::vector<Material> getMaterials();
 	Camera cam;
 
 private :
-	std::vector<Material> materials_;
+	//std::vector<Material> materials_;
 
 };
 
