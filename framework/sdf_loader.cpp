@@ -17,7 +17,7 @@ Scene sdf_loader::load_scene(std::string filename){
 
     if(myfile.is_open())
     {
-    	while(getline(myfile,line))
+    	while(getline(myfile, line))
     	{
     		ss << line;
     		ss >> keyword;
@@ -29,7 +29,8 @@ Scene sdf_loader::load_scene(std::string filename){
 
     		if(keyword == "define")
     		{
-    			ss>>keyword;
+    			ss >> keyword;
+
     			if(keyword == "material")
     			{
     				Material mat;
@@ -49,30 +50,29 @@ Scene sdf_loader::load_scene(std::string filename){
                     ss >> mat.m_;
 
                     s.materials.insert({mat.name_, mat});
-					//std::cout << mat;
+					std::cout << mat;
     			}
 
 
     			else if(keyword == "camera"){
                     std::string name;
-                    float angle, posx, posy, posz, upx, upy, upz;
+                    float angle, pos_x, pos_y, pos_z, up_x, up_y, up_z;
                     ss >> name;
                     ss >> angle;
-                    ss >> posx;
-                    ss >> posy;
-                    ss >> posz;
-                    ss >> upx;
-                    ss >> upy;
-                    ss >> upz;
-                    glm::vec3 pos {posx, posy, posz};
-                    glm::vec3 up {upx, upy, upz};
+                    ss >> pos_x;
+                    ss >> pos_y;
+                    ss >> pos_z;
+                    ss >> up_x;
+                    ss >> up_y;
+                    ss >> up_z;
+                    glm::vec3 pos {pos_x, pos_y, pos_z};
+                    glm::vec3 up {up_x, up_y, up_z};
                     
 
                     Camera cam {name, angle, pos, up}; //ohne direction
-                    //std::cout << cam;
+                    std::cout << cam;
                     s.camera = cam;
                 }
-
                 else if(keyword == "light"){
                     std::string name;
                     float pos_x, pos_y, pos_z, ld_r, ld_g, ld_b, brightness;
@@ -81,19 +81,88 @@ Scene sdf_loader::load_scene(std::string filename){
                     ss >> pos_y;
                     ss >> pos_z;
                     glm::vec3 pos{pos_x, pos_y, pos_z};
+
                     ss >> ld_r;
                     ss >> ld_g;
                     ss >> ld_b;
                     Color ld{ld_r, ld_g, ld_b};
+
+                    std::cout << "test spast" << "\n";
                     ss >> brightness;
-
-                    //TODO klappt das so?
-                    Light light(name, pos, ld, brightness);
-                    s.lights.push_back(light);
-
+					Light licht {name, pos, ld, brightness};
+                    s.lights.push_back(licht);
                     std::cout << "light: " << ld << "\n";
                 }
+
+                else if (keyword == "shape"){
+                	ss >> keyword;
+                	if (keyword == "box"){
+                		std::string name;
+                        std::string mat_namebox;
+                        float min_x, min_y, min_z, max_x, max_y, max_z;
+                        ss >> name;
+
+                        ss >> min_x;
+                        ss >> min_y;
+                        ss >> min_z;
+                        ss >> max_x;
+                        ss >> max_y;
+                        ss >> max_z;
+
+                        glm::vec3 min{min_x, min_y, min_z};
+                        glm::vec3 max{max_x, max_y, max_z};
+
+                        ss >> mat_namebox;
+
+                        std::shared_ptr<Shape> temp_ptr = std::make_shared<Box>
+                        (
+                            Box{name, s.materials[mat_namebox], min, max,}
+                        );
+                        std::cout << *temp_ptr;
+                        s.shapes_ptr.push_back(temp_ptr);
+
+                	}
+                	if(keyword == "sphere"){
+                        std::string name;
+                        float x, y, z, r;
+                        ss >> name;
+                        ss >> x;
+                        ss >> y;
+                        ss >> z;
+                        glm::vec3 center{x,y,z};
+                        ss >> r;
+                        std::string mat_name;
+                        ss >> mat_name;
+
+                        std::shared_ptr<Shape> temp_ptr = std::make_shared<Sphere>
+                        (
+                            Sphere{name, s.materials[mat_name], center, r}
+                        );
+                            std::cout << *temp_ptr;
+                            s.shapes_ptr.push_back(temp_ptr);
+                    }
+                }
+
     		}
+    		else if(keyword == "render"){
+    			std::string name;
+    			Camera camera;
+
+    			ss >> name;
+    			//check if the camera name is like the name of the camera used in renderer
+    			if(name == camera.name_)
+    			{
+    				std::cout << "Name der Camera " << camera.name_ 
+    				<< " ist gleich der vom Renderer " << name << "\n";
+    			} else {
+    				std::cout << "Namen der Camera und des eingelesenen Renderer stimmen nicht überein" << "\n";
+    			}
+
+                ss >> s.filename;
+                ss >> s.x_res;
+                ss >> s.y_res;
+                std::cout << s.filename << "\n" <<"Resolution: "<< s.x_res << " x " << s.y_res << "\n";
+            }
     	}
     	myfile.close();
     }

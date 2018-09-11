@@ -7,15 +7,19 @@
 #include "material.hpp"
 #include "camera.hpp"
 #include "light.hpp"
-
+#include <memory>
+#include "shape.hpp"
 
 
 struct Scene
 {
-	//Shapes (Box Sphere)
 	Camera camera;
 	std::map<std::string,Material> materials;
 	std::vector<Light> lights;
+	std::vector<std::shared_ptr<Shape>> shapes_ptr;
+	float x_res = 0.0;
+	float y_res = 0.0;
+	std::string filename;
 };
 
 #endif //#define SCENE_HPP

@@ -15,11 +15,14 @@
 #include "ppmwriter.hpp"
 #include <string>
 #include <glm/glm.hpp>
+#include "scene.hpp"
 
 class Renderer
 {
 public:
   Renderer(unsigned w, unsigned h, std::string const& file);
+  Renderer(unsigned w, unsigned h, std::string const& file, Scene const& s);
+
 
   void render();
   void write(Pixel const& p);
@@ -35,6 +38,7 @@ private:
   std::vector<Color> colorbuffer_;
   std::string filename_;
   PpmWriter ppm_;
+  Scene scene_;
 };
 
 #endif // #ifndef BUW_RENDERER_HPP

@@ -187,16 +187,11 @@ TEST_CASE("Sdf_loader_camera", "[sdf_loader]"){
 	Scene s{};
 	std::map<std::string, Material> mat;
 
-
 	//s = loader.load_scene("/home/IN/xavo6170/Git/programmiersprachen-raytracer/camera.txt");
 	s = loader.load_scene("../../../camera.txt");
-
-	for(std::map<std::string, Material>::iterator it = mat.begin();
-	 it != mat.end(); ++it){
-	 	std::cout << it->second << std::endl;
-	}
 	
 	std::cout << s.camera.get_name() << " + " << s.camera.get_angle() << std::endl;
+	std::cout << s.x_res << " + " << s.y_res << "\n";
 }
 
 /*

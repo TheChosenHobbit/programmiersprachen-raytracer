@@ -32,8 +32,9 @@ class Camera {
 		glm::vec3 get_direction() const; 
 		glm::vec3 get_up() const;
 
-	private:
 		std::string name_;
+
+	private:
 		float fov_x_; //horizontal openeningangle
 		glm::vec3 eye_; // Position in space
 		glm::vec3 dir_; // line of sight
