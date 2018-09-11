@@ -6,8 +6,8 @@
 
 Sphere::Sphere():
 	Shape("Sphere",Material{}),
-	center_{0,0,0},
-	radius_{0}{ std::cout << "Sphere::Constructor" << std::endl; }
+	center_{0.0,0.0,5.0},
+	radius_{1.0}{ std::cout << "Sphere::Constructor" << std::endl; }
 
 Sphere::Sphere(std::string const& name, Material const& material, glm::vec3 const& center, float radius):
 	Shape({name},{material}),
