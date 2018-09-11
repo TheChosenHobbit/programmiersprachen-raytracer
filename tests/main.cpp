@@ -12,7 +12,7 @@
 #include "sdf_loader.hpp"
 #include "material.hpp"
 #include "light.hpp"
-
+#include "glm/ext.hpp"
 
 
 TEST_CASE ("Sphere Area and Volume","[Sphere]"){
@@ -54,25 +54,29 @@ TEST_CASE("Print","[Ausgabe]"){
 	std::cout << b;
 }
 
-
+*/
 TEST_CASE("intersectRaySphere","[intersect]"){
-	std::cout << "____________________intersect___________________" << std::endl;
+	std::cout << "____________________Raytracer Sphere intersect___________________" << std::endl;
 	//Ray
 	glm::vec3 ray_origin{0.0,0.0,0.0};
 	//ray direction has to be normalized !
 	//you can use:
 	//	v = glm:: normalize(some_vector)
 	glm::vec3 ray_direction{0.0 ,0.0 ,1.0};
+	Ray ray(ray_origin,ray_direction);
 	// Sphere
-	glm::vec3 sphere_center{0.0 ,0.0 ,5.0};
-	float sphere_radius{1.0};
+	
+	Sphere sphere0{};
 	float distance{0.0};
-	auto result = glm::intersectRaySphere(ray_origin, ray_direction, sphere_center,
-		sphere_radius * sphere_radius,	// squared radius !!!
-		distance);
-	REQUIRE(distance == Approx(4.0f));
+	glm::vec3 intersection;
+	//auto result = glm::intersectRaySphere(ray_origin, ray_direction, sphere_center,
+	//	sphere_radius * sphere_radius,	// squared radius !!!
+	//	distance);
+	
+	REQUIRE(sphere0.intersect(ray,distance,intersection));
+	std::cout << "Ausgabe intersection " << glm::to_string(intersection) << std::endl;
 }
-
+/*
 TEST_CASE("Statisch und Dynamisch", "[Aufgabe 7]"){
 	std::cout << "____________________Aufgabe 7___________________" << std::endl;
 	Color red(255, 0, 0);
@@ -156,17 +160,18 @@ Shape::Destructor 				Shape::Destructor
 
 */
 
-/*
+
 TEST_CASE("Box Intersect", "[Raytracer]"){
 	std::cout << "____________________Raytracer Box Intersect___________________" << std::endl;
 	Box box;
 	Ray ray {{-2.0f, 1.0f, 0.5f},{2.0f, -0.7f, 0.0f}};
 	float distance;
+	glm::vec3 intersection;
 
-	REQUIRE(box.intersect(ray, distance));
-	box.intersect(ray, distance);
-	std::cout << "Ausgabe Distance " << distance << std::endl;
-}*/
+	REQUIRE(box.intersect(ray, distance, intersection));
+	box.intersect(ray, distance,intersection);
+	std::cout << "Ausgabe intersection " << glm::to_string(intersection) << std::endl;
+}
 /*
 TEST_CASE("read sdf", "[raytracer]"){
 	std::cout << "____________________Scene Reader___________________" << std::endl;

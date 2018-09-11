@@ -146,9 +146,9 @@ Scene sdf_loader::load_scene(std::string filename){
     		}
     		else if(keyword == "render"){
     			std::string name;
-    			Camera camera;
 
     			ss >> name;
+    			/*
     			//check if the camera name is like the name of the camera used in renderer
     			if(name == camera.name_)
     			{
@@ -156,7 +156,7 @@ Scene sdf_loader::load_scene(std::string filename){
     				<< " ist gleich der vom Renderer " << name << "\n";
     			} else {
     				std::cout << "Namen der Camera und des eingelesenen Renderer stimmen nicht überein" << "\n";
-    			}
+    			}*/
 
                 ss >> s.filename;
                 ss >> s.x_res;
