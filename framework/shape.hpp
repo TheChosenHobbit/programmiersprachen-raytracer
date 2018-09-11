@@ -5,6 +5,7 @@
 #include "ray.hpp"
 #include <string>
 #include "glm/glm.hpp"
+#include "hit.hpp"
 
 class Shape
 {
@@ -26,6 +27,8 @@ public:
     virtual std::ostream& print(std::ostream& os) const;
 
     virtual bool intersect(Ray const& ray, float& t, glm::vec3& intersection, glm::vec3& normal) const = 0;
+    virtual Hit intersect(Ray const& ray) = 0;
+
 
 protected:
 	std::string name_;

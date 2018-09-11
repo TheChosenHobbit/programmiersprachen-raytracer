@@ -43,3 +43,22 @@ bool Sphere::intersect (Ray const& ray, float& distance, glm::vec3& intersection
 	auto norm_direction = glm::normalize(ray.direction);
 	return glm::intersectRaySphere(ray.origin, norm_direction, center_, radius_, intersection, normal);
 }
+
+Hit Sphere::intersect (Ray const& ray){
+	ray.direction = glm::normalize(ray.direction);
+	float distance;
+	glm::vec3 intersec, normvec;
+	bool hit = glm::intersectRaySphere(ray.origin, ray.direction, center_, radius_ * radius_, distance);
+
+	if(hit){
+		intersec = ray.origin + ray.direction * distance;
+		normvec = glm::normalize(intersec - center_);
+
+		Hit hi (hit, distance, intersec, normvec, material_, "sphere");
+
+		return hi;
+	} else {
+		Hit hi{};
+		return hi;
+	}
+}

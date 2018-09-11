@@ -158,9 +158,6 @@ Shape::Destructor 				Shape::Destructor
 	welche für den Zweck, den man verdeutlichen möchte ausreichen.
 		
 
-*/
-
-/*
 TEST_CASE("Box Intersect", "[Raytracer]"){
 	std::cout << "____________________Raytracer Box Intersect___________________" << std::endl;
 	Box box;
@@ -172,7 +169,7 @@ TEST_CASE("Box Intersect", "[Raytracer]"){
 	box.intersect(ray, distance,intersection);
 	std::cout << "Ausgabe intersection " << glm::to_string(intersection) << std::endl;
 }
-/*
+
 TEST_CASE("read sdf", "[raytracer]"){
 	std::cout << "____________________Scene Reader___________________" << std::endl;
 	

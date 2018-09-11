@@ -116,7 +116,7 @@ Scene sdf_loader::load_scene(std::string filename){
 
                         std::shared_ptr<Shape> temp_ptr = std::make_shared<Box>
                         (
-                            Box{name, s.materials[mat_namebox], min, max,}
+                            Box{name, s.materials[mat_namebox], min, max}
                         );
                         std::cout << *temp_ptr;
                         s.shapes_ptr.push_back(temp_ptr);

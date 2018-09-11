@@ -3,6 +3,7 @@
 #include <cmath>
 #include "material.hpp"
 #include "ray.hpp"
+#include <catch.hpp>
 
 Box::Box():
 	Shape("Box",Material{}),
@@ -176,4 +177,115 @@ bool Box::intersect (Ray const& ray, float& dista, glm::vec3& intersection, glm:
         return true;
     }
 	return false;
+}
+
+
+Hit Box::intersect (Ray const& ray){
+	float t0, t1;
+	float tnear;
+	float tfar;
+	bool hit = true;
+	float distance = -1;
+	glm::vec3 normvec;
+	glm::vec3 intersec;
+	Hit hi{};
+
+	// {0,0,0} abfangen
+	if (ray.direction.x == 0 && ray.direction.y == 0 && ray.direction.z == 0) {return hi;}
+
+	if (ray.direction.x == Approx(0.0f))
+	{
+		
+		if(min_.x > ray.origin.x || max_.x < ray.origin.x) {return hi;}
+		//find intersect distance with x coord
+	} else {
+
+		t0 = (min_.x - ray.origin.x) / ray.direction.x;
+		t1 = (max_.x - ray.origin.x) / ray.direction.x;
+		tfar = std::max(t0,t1);
+		tnear = std::min(t0,t1);
+
+		if (tnear > tfar)
+		{
+			return hi;
+		}
+	}
+
+	if (ray.direction.y == Approx(0.0f))
+	{
+		
+		if(min_.y > ray.origin.y || max_.y < ray.origin.y) {return hi;}
+		//find intersect distance with y coord
+	} else {
+
+		t0 = (min_.y - ray.origin.y) / ray.direction.y;
+		t1 = (max_.y - ray.origin.y) / ray.direction.y;
+
+		if(ray.direction.x == Approx(0.0f)){
+
+			tfar = std::max(t0,t1);
+			tnear = std::min(t0,t1);
+
+		} else {
+
+			tnear = std::max(tnear, std::min(t0,t1));
+			tfar = std::min(tfar, std::max(t0,t1));
+		}
+		
+		if (tnear > tfar)
+		{
+			return hi;
+		}
+	}
+
+	if (ray.direction.z == Approx(0.0f))
+	{
+		
+		if(min_.z > ray.origin.z || max_.z < ray.origin.z) {return hi;}
+		//find intersect distance with z coord
+	} else {
+
+		t0 = (min_.z - ray.origin.z) / ray.direction.z;
+		t1 = (max_.z - ray.origin.z) / ray.direction.z;
+
+
+		if(ray.direction.x == Approx(0.0f) && ray.direction.y == Approx(0.0f)){
+
+			tfar = std::max(t0,t1);
+			tnear = std::min(t0,t1);
+			
+		} else {
+
+			tnear = std::max(tnear, std::min(t0,t1));
+			tfar = std::min(tfar, std::max(t0,t1));
+		}
+		
+		if (tnear > tfar)
+		{
+			return hi;
+		}
+	}
+
+	if(tnear < 0.0f && tfar < 0.0f) {return hi;} //ray.origin behind box
+	else if (tnear < 0.0f && tfar >= 0.0f) {tfar = tnear;} //ray.origin in box
+	
+	distance = tnear * sqrt(ray.direction.x * ray.direction.x + ray.direction.y * ray.direction.y + ray.direction.z * ray.direction.z);
+	intersec = ray.origin + ray.direction * tnear; 
+	//calc normvector
+	if(intersec.x == Approx(min_.x)) {normvec = {-1.0f, 0.0f, 0.0f};}
+	else if (intersec.x == Approx(max_.x)) {normvec = {1.0f, 0.0f, 0.0f};}
+	else if (intersec.y == Approx(min_.y)) {normvec = {0.0f, -1.0f, 0.0f};}
+	else if (intersec.y == Approx(max_.y)) {normvec = {0.0f, 1.0f, 0.0f};}
+	else if (intersec.z == Approx(min_.z)) {normvec = {0.0f, 0.0f, -1.0f};}
+	else if (intersec.z == Approx(max_.z)) {normvec = {0.0f, 0.0f, 1.0f};}
+
+	//create hit
+	hi.is_hit_ = hit;
+	hi.distance_ = distance;
+	hi.intersec_ = intersec;
+	hi.normvec_ = normvec;
+	hi.material_ = material_;
+	hi.type_ = "box";
+
+	return hi;
 }
