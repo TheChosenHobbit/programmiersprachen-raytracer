@@ -54,7 +54,8 @@ TEST_CASE("Print","[Ausgabe]"){
 	std::cout << b;
 }
 
-*//*
+*/
+/*
 TEST_CASE("intersectRaySphere","[intersect]"){
 	std::cout << "____________________Raytracer Sphere intersect___________________" << std::endl;
 	//Ray
@@ -76,6 +77,7 @@ TEST_CASE("intersectRaySphere","[intersect]"){
 	REQUIRE(sphere0.intersect(ray,distance,intersection));
 	std::cout << "Ausgabe intersection " << glm::to_string(intersection) << std::endl;
 }
+
 /*
 TEST_CASE("Statisch und Dynamisch", "[Aufgabe 7]"){
 	std::cout << "____________________Aufgabe 7___________________" << std::endl;
@@ -156,7 +158,6 @@ Shape::Destructor 				Shape::Destructor
 	zeigt den aktuellen Zustand, d. h. die Belegung der Attribute, eines Objektes bzw. einer Klasse. 
 	Da die Anzahl der Attribute sehr groß sein kann, ist es möglich, nur bestimmte Attribute aufzulisten, 
 	welche für den Zweck, den man verdeutlichen möchte ausreichen.
-		
 
 TEST_CASE("Box Intersect", "[Raytracer]"){
 	std::cout << "____________________Raytracer Box Intersect___________________" << std::endl;
@@ -185,7 +186,7 @@ TEST_CASE("read sdf", "[raytracer]"){
 
 TEST_CASE("Sdf_loader_camera", "[sdf_loader]"){
 	std::cout << "____________________Sdf_loader_camera___________________" << std::endl;
-	sdf_loader loader;
+	Sdf_loader loader;
 	Scene s{};
 	std::map<std::string, Material> mat;
 
@@ -194,6 +195,22 @@ TEST_CASE("Sdf_loader_camera", "[sdf_loader]"){
 	
 	std::cout << s.camera.get_name() << " + " << s.camera.get_angle() << std::endl;
 	std::cout << s.x_res << " + " << s.y_res << "\n";
+}
+
+TEST_CASE("sphere intersect", "[hi]"){
+	std::cout << "____________________sphere intersect___________________" << std::endl;
+	Color blue(0, 255, 0);
+	Material mat("blue", blue, blue, blue, 1.0f);
+	Sphere sphere("sphere", mat, {3.0f, 5.5f, -2.0f}, 10.0f);
+
+	
+	std::cout << sphere << std::endl;
+	Ray ray{};
+	float distance;
+
+	Hit hit = sphere.intersect(ray);
+
+	REQUIRE(hit.is_hit_);
 }
 
 /*

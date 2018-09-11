@@ -1,14 +1,14 @@
 #include "sdf_loader.hpp"
 
-sdf_loader::sdf_loader():
+Sdf_loader::Sdf_loader():
 	filename_{""}{}
 
-sdf_loader::sdf_loader(std::string filename):
+Sdf_loader::Sdf_loader(std::string filename):
 	filename_{filename}{}
 
-sdf_loader::~sdf_loader(){}
+Sdf_loader::~Sdf_loader(){}
 
-Scene sdf_loader::load_scene(std::string filename){
+Scene Sdf_loader::load_scene(std::string filename){
 	Scene s;
 	std::string line;
     std::ifstream myfile (filename);

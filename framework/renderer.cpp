@@ -56,9 +56,15 @@ void Renderer::render(){
 
   for(unsigned y = 0; y < height_; ++y){
     for (unsigned x = 0; x < width_; ++x){
+
+      Ray ray = cam.createRay(x,y);
+
       Pixel p(x,y);
       Color color{};
+      color = raytrace(ray);
+      
 
+      /*
       //Antialiasing
       for(float i = 0.0f; i < 1.0f; i += 0.5f){
         for(float j = 0.0f; j < 1.0f; j += 0.5f){
@@ -74,6 +80,7 @@ void Renderer::render(){
           color += 0.25f * subcolor;
         }
       }
+      */
       
       p.color = color;
       write(p);

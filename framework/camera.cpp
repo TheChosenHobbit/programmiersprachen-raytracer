@@ -33,7 +33,7 @@ Camera::~Camera(){}
 
 Ray Camera::createRay(float x, float y){
 	glm::vec3 origin {0.0f, 0.0f, 0.0f};
-	glm::vec3 direction {x, y, -distance_};
+	glm::vec3 direction {x, y, -5.0f};
 	Ray ray{origin, direction};
 	return ray;
 }

@@ -17,12 +17,12 @@
 #include "sphere.hpp"
 #include "light.hpp"
 
-class  sdf_loader
+class Sdf_loader
 {
 	public:
-		sdf_loader();
-		sdf_loader(std::string filename);
-		~sdf_loader();
+		Sdf_loader();
+		Sdf_loader(std::string filename);
+		~Sdf_loader();
 
 		Scene load_scene(std::string filename);
 
