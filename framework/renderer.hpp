@@ -10,12 +10,18 @@
 #ifndef BUW_RENDERER_HPP
 #define BUW_RENDERER_HPP
 
+#include "scene.hpp"
 #include "color.hpp"
 #include "pixel.hpp"
 #include "ppmwriter.hpp"
 #include <string>
+#include <vector>
+#include <memory>
 #include <glm/glm.hpp>
-#include "scene.hpp"
+#include "hit.hpp"
+#include "shape.hpp"
+#include "ray.hpp"
+
 
 class Renderer
 {
@@ -26,6 +32,9 @@ public:
 
   void render();
   void write(Pixel const& p);
+
+  Hit findHit(std::vector<std::shared_ptr<Shape>> const& shapes, Ray const& ray);
+  Color raytrace(Ray const& ray);
 
   inline std::vector<Color> const& colorbuffer() const
   {

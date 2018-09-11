@@ -118,6 +118,7 @@ Scene sdf_loader::load_scene(std::string filename){
                         (
                             Box{name, s.materials[mat_namebox], min, max}
                         );
+
                         std::cout << *temp_ptr;
                         s.shapes_ptr.push_back(temp_ptr);
 

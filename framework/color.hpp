@@ -14,6 +14,8 @@
 
 struct Color
 {
+  Color() : r(0.0f), g(0.0f), b(0.0f) {}
+
   Color(float red, float green, float blue) :
   r(red),
   g(green),
@@ -84,6 +86,15 @@ struct Color
     auto tmp(a);
     tmp *= b;
     return tmp;
+  }
+
+  friend Color operator*(float factor, Color const& col)
+  {
+    float r = col.r*factor;
+    float g = col.g*factor;
+    float b = col.b*factor;
+    Color color{r, g, b};
+    return color;
   }
 
   friend bool operator==(Color const& a, Color const& b)

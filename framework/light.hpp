@@ -18,10 +18,11 @@ public:
 	Color get_ld() const;
 	float get_brightness() const;
 
-private:
-	std::string name_;
 	glm::vec3 pos_;
 	Color ld_;
+
+private:
+	std::string name_;
 	float brightness_;
 
 };

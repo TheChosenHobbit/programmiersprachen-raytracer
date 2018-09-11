@@ -16,15 +16,17 @@
 
 class Camera {
 	public:
+		Camera();
 		Camera(std::string name, float fov_x);
 		Camera(std::string name, float fov_x, glm::vec3 const& eye_, 
 			   glm::vec3 const& dir_, glm::vec3 const& up_);
 		Camera(std::string name, float fov_x, glm::vec3 const& eye_, glm::vec3 const& up);
-		Camera();
 		~Camera();
 
 		Camera& operator= (Camera const& rhs);
 		friend std::ostream& operator<<(std::ostream& os, Camera const& c);
+		
+		Ray createRay(float x, float y);
 
 		std::string get_name() const;
 		float get_angle() const;
@@ -39,6 +41,7 @@ class Camera {
 		glm::vec3 eye_; // Position in space
 		glm::vec3 dir_; // line of sight
 		glm::vec3 up_; // Up-Vector
+		float distance_; // distabce to pixel canvas
 };
 
 #endif
