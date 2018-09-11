@@ -5,7 +5,7 @@
 #include "material.hpp"
 
 Sphere::Sphere():
-	Shape({"Sphere"},{Material{}}),
+	Shape("Sphere",Material{}),
 	center_{0,0,0},
 	radius_{0}{ std::cout << "Sphere::Constructor" << std::endl; }
 

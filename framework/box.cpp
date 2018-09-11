@@ -5,7 +5,7 @@
 #include "ray.hpp"
 
 Box::Box():
-	Shape({"Box"},{Material{}}),
+	Shape("Box",Material{}),
 	min_{0,0,0},
 	max_{1,1,1}{ std::cout << "Box::Constructor" << std::endl; }
 
