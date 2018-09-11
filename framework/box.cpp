@@ -47,7 +47,34 @@ std::ostream& Box::print(std::ostream& os) const{
 	return os;
 }
 
-bool Box::intersect (Ray const& ray, float& dista, glm::vec3& intersection) const{
+glm::vec3 Box::generate_normale(glm::vec3 const& v)const{
+    glm::vec3 normal(0.0,0.0,0.0);
+
+    if (max_.x - v.x > 0){
+        normal.x = 1; 
+    }
+    else if (max_.x - v.x < 0){
+        normal.x = -1;
+    }
+
+    if (max_.y - v.y > 0){
+        normal.y = 1; 
+    }
+    else if (max_.y - v.y < 0){
+        normal.y = -1;
+    }
+
+    if (max_.z - v.z > 0){
+		normal.z = 1; 
+    }
+    else if (max_.z - v.z < 0){
+        normal.z = -1;
+    }
+
+    return normal;
+}
+
+bool Box::intersect (Ray const& ray, float& dista, glm::vec3& intersection, glm::vec3& normal) const{
 	float tnear,tfar;
 	float tnear_x,tnear_y,tnear_z;
 	float t0, t1, t_final;
@@ -117,5 +144,36 @@ bool Box::intersect (Ray const& ray, float& dista, glm::vec3& intersection) cons
 
 	intersection = ray.origin + ray.direction * t_final;
 
-	return true;
+	if (min_.x == intersection.x){
+        //front: 
+        normal = generate_normale(glm::vec3(min_.x, max_.y, max_.z));
+    }
+    else if (max_.x == intersection.x){
+        // back:
+        normal = generate_normale(glm::vec3(max_.x, min_.y, min_.z));
+    }
+    else if (min_.y == intersection.y){
+        //left side:
+        normal = generate_normale(glm::vec3(max_.x, min_.y, max_.z));
+    }
+    else if (max_.y == intersection.y){
+        //right side:
+        normal = generate_normale(glm::vec3(min_.x, max_.y, min_.z) );
+    }
+    else if (min_.z == intersection.z){
+        //bottom: 
+        normal = generate_normale(glm::vec3(max_.x, max_.y, min_.z));
+    }
+    else if (max_.z == intersection.z){
+        //top: 
+        normal = generate_normale(glm::vec3(min_.x, min_.y, max_.z));
+    }
+    
+    if (tfar > std::max(0.0f, tnear)) {
+        dista = sqrt(tnear * tnear * (ray.direction.x * ray.direction.x +
+                        ray.direction.y * ray.direction.y + ray.direction.z * 
+                        ray.direction.z));
+        return true;
+    }
+	return false;
 }

@@ -12,13 +12,14 @@ Scene sdf_loader::load_scene(std::string filename){
 	Scene s;
 	std::string line;
     std::ifstream myfile (filename);
-    std::stringstream ss;
-    std::string keyword;
+    
 
     if(myfile.is_open())
     {
     	while(getline(myfile, line))
     	{
+            std::stringstream ss;
+            std::string keyword;
     		ss << line;
     		ss >> keyword;
 
@@ -87,7 +88,6 @@ Scene sdf_loader::load_scene(std::string filename){
                     ss >> ld_b;
                     Color ld{ld_r, ld_g, ld_b};
 
-                    std::cout << "test spast" << "\n";
                     ss >> brightness;
 					Light licht {name, pos, ld, brightness};
                     s.lights.push_back(licht);

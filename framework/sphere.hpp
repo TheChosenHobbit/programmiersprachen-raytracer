@@ -22,7 +22,7 @@ class Sphere: public Shape
 
     std::ostream& print(std::ostream& os) const override;
 
-    bool intersect (Ray const& ray, float& t, glm::vec3& intersection) const;
+    bool intersect (Ray const& ray, float& t, glm::vec3& intersection, glm::vec3& normal) const;
 
 private:
 	glm::vec3 center_;

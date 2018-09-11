@@ -15,7 +15,7 @@
 #include "glm/ext.hpp"
 
 
-TEST_CASE ("Sphere Area and Volume","[Sphere]"){
+/*TEST_CASE ("Sphere Area and Volume","[Sphere]"){
 	std::cout << "____________________Sphere___________________" << std::endl;
 	Material m {};
 	Sphere s{"test",m,{1.0,1.0,1.0},{2}};
@@ -25,7 +25,7 @@ TEST_CASE ("Sphere Area and Volume","[Sphere]"){
 	Sphere s1;
 	REQUIRE(s1.area() == Approx(0));
 	REQUIRE(s1.volume() == Approx(0));
-	REQUIRE(s1.getName() == "Sphere");*/
+	REQUIRE(s1.getName() == "Sphere");
 }
 
 TEST_CASE("Box Area und Volume","[Box]"){
@@ -42,7 +42,7 @@ TEST_CASE("Box Area und Volume","[Box]"){
 
 	Box b2{{"Box2"},{1,0,0},{1.0,2.0,3.0},{-3.0,2.0,-1.0}};
 	REQUIRE(b2.area() == Approx(32.0f));
-	REQUIRE(b2.volume() == Approx(0.0f));*/
+	REQUIRE(b2.volume() == Approx(0.0f));
 }
 /*
 TEST_CASE("Print","[Ausgabe]"){
@@ -54,7 +54,7 @@ TEST_CASE("Print","[Ausgabe]"){
 	std::cout << b;
 }
 
-*/
+*//*
 TEST_CASE("intersectRaySphere","[intersect]"){
 	std::cout << "____________________Raytracer Sphere intersect___________________" << std::endl;
 	//Ray
@@ -160,7 +160,7 @@ Shape::Destructor 				Shape::Destructor
 
 */
 
-
+/*
 TEST_CASE("Box Intersect", "[Raytracer]"){
 	std::cout << "____________________Raytracer Box Intersect___________________" << std::endl;
 	Box box;
