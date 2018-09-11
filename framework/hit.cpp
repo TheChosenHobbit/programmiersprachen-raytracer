@@ -7,7 +7,7 @@ Hit::Hit():
 	normvec_({0.0f, 0.0f, 0.0f}){}
 
 Hit::Hit(bool hit, float distance, glm::vec3 const& intersec, glm::vec3 const& normvec):
-	hit_(hit),
+	is_hit_(hit),
 	distance_(distance),
 	intersec_(intersec),
 	normvec_(normvec){}
