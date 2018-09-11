@@ -101,7 +101,7 @@ void Renderer::write(Pixel const& p)
 }
 
 //findet den ersten Hit unter allen Shapes
-Hit findHit(std::vector<std::shared_ptr<Shape>> const& shapes, Ray const& ray)
+Hit Renderer::findHit(std::vector<std::shared_ptr<Shape>> const& shapes, Ray const& ray)
 {
   Hit firstHit{};
   firstHit.distance_ = 100000000.0f;
