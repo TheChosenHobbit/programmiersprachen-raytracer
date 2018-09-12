@@ -8,18 +8,19 @@ int main(int argc, char* argv[])
 {
   unsigned const width = 800;
   unsigned const height = 800;
-  /*
+ /* 
   for (int i = 1; i <= 120; ++i)
   {
-  std::string const filename = "./animation"+i+".ppm";
+  std::string const filename = "./animation"+ std::to_string(i) +".ppm";
 
   Sdf_loader loader;
-  Scene scene = loader.load_scene("/home/david/Git/raytracer/programmiersprachen-raytracer/animation"+i+".txt");
+  Scene scene = loader.load_scene("/home/david/Git/raytracer/programmiersprachen-raytracer/animationfiles/animation"+ std::to_string(i) +".txt"); //Animation
 
   Renderer app(width, height, filename, scene);
   app.render();
 
   std::thread thr([&app]() { app.render(); });
+  thr.join();
 
   }
 */
@@ -28,7 +29,8 @@ int main(int argc, char* argv[])
   Sdf_loader loader;
   Scene scene = loader.load_scene("/home/david/Git/raytracer/programmiersprachen-raytracer/testload.txt");
 
-  Renderer app(width, height, filename, scene);
+  //Renderer app(scene.x_res, scene.y_res, filename, scene);
+  Renderer app(width,height,filename,scene);
   app.render();
 
   std::thread thr([&app]() { app.render(); });
@@ -46,7 +48,6 @@ int main(int argc, char* argv[])
     win.update();
   }
 
-  thr.join();
 
   return 0;
 }
