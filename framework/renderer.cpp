@@ -62,25 +62,6 @@ void Renderer::render(){
       Color color{};
       color = raytrace(ray);
       
-
-      /*
-      //Antialiasing
-      for(float i = 0.0f; i < 1.0f; i += 0.5f){
-        for(float j = 0.0f; j < 1.0f; j += 0.5f){
-    
-          float y1 = (float)y + i;
-          float x1 = (float)x + j;
-
-          x1 = (x1 - half_width)/width;
-          y1 = (y1 - half_height)/width;
-
-          Ray camRay = cam.createRay(x1, y1);
-          Color subcolor = raytrace(camRay);
-          color += 0.25f * subcolor;
-        }
-      }
-      */
-      
       p.color = color;
       write(p);
       
