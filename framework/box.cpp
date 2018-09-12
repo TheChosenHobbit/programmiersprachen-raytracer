@@ -272,7 +272,7 @@ Hit Box::intersect (Ray const& ray){
 	distance = tnear * sqrt(ray.direction.x * ray.direction.x + ray.direction.y * ray.direction.y + ray.direction.z * ray.direction.z);
 	intersec = ray.origin + ray.direction * tnear; 
 	//calc normvector
-	if(intersec.x == Approx(min_.x)) {normvec = {-1.0f, 0.0f, 0.0f};}
+	if(intersec.x == Approx(min_.x)) 	   {normvec = {-1.0f, 0.0f, 0.0f};}
 	else if (intersec.x == Approx(max_.x)) {normvec = {1.0f, 0.0f, 0.0f};}
 	else if (intersec.y == Approx(min_.y)) {normvec = {0.0f, -1.0f, 0.0f};}
 	else if (intersec.y == Approx(max_.y)) {normvec = {0.0f, 1.0f, 0.0f};}

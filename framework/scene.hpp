@@ -20,7 +20,7 @@ struct Scene
 	float x_res = 0.0;
 	float y_res = 0.0;
 	std::string filename;
-	Color backgroundcolor {0.5f, 0.2f, 0.5f};
+	Color backgroundcolor;
 };
 
 #endif //#define SCENE_HPP

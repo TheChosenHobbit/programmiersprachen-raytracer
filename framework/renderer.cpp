@@ -118,15 +118,45 @@ Color Renderer::raytrace(Ray const& ray)
     color = scene_.backgroundcolor;
   }
   else {
-
+    //ambiente Beleuchtung 
     Material mat = camHit.material_;
-
     color.r += mat.ka_.r * scene_.backgroundcolor.r; 
     color.g += mat.ka_.g * scene_.backgroundcolor.g;
     color.b += mat.ka_.b * scene_.backgroundcolor.b;
 
+
     for(auto it = scene_.lights.begin(); it != scene_.lights.end(); ++ it)
     {
+      /*
+      Ray lightray{camHit.intersec_,
+      (*it).pos_- camHit.intersec_};
+
+      glm::vec3 l = lightray.direction;
+      l = glm::normalize(l);
+      float nl = glm::dot(camHit.normvec_,l);
+
+      Hit lightHits = findHit(scene_.shapes_ptr, lightray);
+      glm::vec3 r = glm::normalize(2 * nl * camHit.normvec_ - l);
+      glm::vec3 v = glm::normalize(glm::vec3 {ray.direction.x * (-1),
+                ray.direction.y * (-1), ray.direction.z * (-1)});
+
+    if(lightHits.is_hit_ == true)
+    {
+
+
+      color = color + (*it).ld_* (
+      (camHit.material_.ks_) * 
+      std::pow(glm::dot(r, v), camHit.material_.m_) +
+      (camHit.material_.kd_ * std::max(nl, 0.0f)));
+    } else
+    {
+      color.r += mat.kd_.r * (*it).ld_.r * (glm::dot(camHit.normvec_, lightray.direction) + mat.ks_.r * glm::dot(r,v));
+      color.g += mat.kd_.g * (*it).ld_.g * (glm::dot(camHit.normvec_, lightray.direction) + mat.ks_.g * glm::dot(r,v));
+      color.b += mat.kd_.b * (*it).ld_.b * (glm::dot(camHit.normvec_, lightray.direction) + mat.ks_.b * glm::dot(r,v));
+    }*/
+
+
+      
       glm::vec3 lightVec = (*it).pos_ - camHit.intersec_; 
       lightVec = glm::normalize(lightVec);
 
@@ -137,19 +167,21 @@ Color Renderer::raytrace(Ray const& ray)
         lightRay = {camHit.intersec_+ 0.01f * lightVec, lightVec};
       } 
       else if(camHit.type_ == "box"){
-        lightRay = {(camHit.intersec_ + 0.01f * lightVec), lightVec};
+        lightRay = {camHit.intersec_ + 0.01f * lightVec, lightVec};
       }
       Hit lightHits = findHit(scene_.shapes_ptr, lightRay);
+
+      glm::vec3 spec_light = glm::reflect(lightVec, camHit.normvec_);
+      float r_v_ = pow(glm::dot(glm::normalize(ray.direction) , glm::normalize(spec_light)), mat.m_);  //Spiegelende Reflexion
 
       //Schatten
       if(!lightHits.is_hit_)
       {
-
-          color.r += mat.kd_.r * (*it).ld_.r * (glm::dot(camHit.normvec_, lightRay.direction) + mat.ks_.r);
-          color.g += mat.kd_.g * (*it).ld_.g * (glm::dot(camHit.normvec_, lightRay.direction) + mat.ks_.g);
-          color.b += mat.kd_.b * (*it).ld_.b * (glm::dot(camHit.normvec_, lightRay.direction) + mat.ks_.b);
-        
+          color.r += mat.kd_.r * (*it).ld_.r * (glm::dot(camHit.normvec_, lightRay.direction) + mat.ks_.r * r_v_);
+          color.g += mat.kd_.g * (*it).ld_.g * (glm::dot(camHit.normvec_, lightRay.direction) + mat.ks_.g * r_v_);
+          color.b += mat.kd_.b * (*it).ld_.b * (glm::dot(camHit.normvec_, lightRay.direction) + mat.ks_.b * r_v_);
       }
+
 
     }
   }

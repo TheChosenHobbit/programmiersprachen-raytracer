@@ -20,10 +20,11 @@ public:
 
 	glm::vec3 pos_;
 	Color ld_;
+	float brightness_;
 
 private:
 	std::string name_;
-	float brightness_;
+
 
 };
 

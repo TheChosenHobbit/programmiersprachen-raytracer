@@ -147,6 +147,16 @@ Scene Sdf_loader::load_scene(std::string filename){
                             s.shapes_ptr.push_back(temp_ptr);
                     }
                 }
+                else if(keyword == "backgroundcolor")
+                {
+                    float color_r, color_g, color_b;
+                    ss >> color_r;
+                    ss >> color_g;
+                    ss >> color_b;
+                    Color background{color_r, color_g, color_b};
+                    s.backgroundcolor = background;
+                    std::cout << "Backgroundcolor" << background;
+                }
 
     		}
     		else if(keyword == "render"){

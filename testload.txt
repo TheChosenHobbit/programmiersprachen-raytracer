@@ -1,11 +1,17 @@
-define material red 1 0 0 1 0 0 1 0 0 1
-define material blue 0 0 1 0 0 1 0 0 1 1
-define material green 0 1 0 0 1 0 0 1 0 1
+define material red 1 0 0 1 0 0 1 0 0 0
+define material blue 0 0 1 0 0 1 0 0 1 0
+define material green 0 1 0 0 1 0 0 1 0 0
 
-define shape box rbottom -300 -40 0 300 -40 -400 red
-#define shape sphere bsphere 0 0 -100 50 green
-define shape sphere bsphere1 0 0 -50 10 blue
+define shape box bottomplate -300 -40 0 300 -40 -400 green
+#define shape box rbottom1 -20 0 -40 20 40 -60 green
 
-define light sun -30 50 0 .2 .2 .2 100
+define shape sphere bsphere 30 20 -100 15 green
+define shape sphere bsphere1 0 0 -70 10 red
+#define shape sphere bsphere2 -30 -20 -100 15 blue
+
+define light sun -40 50 0 .4 .4 .4 100
+define light moon 40 50 0 .2 .2 .2 100
 define camera cam 45 0 0 0 0 0 -1 0 1 0
 render eye image.ppm 480 320
+
+define backgroundcolor 0.0 0.1 0.6
