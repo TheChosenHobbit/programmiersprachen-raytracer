@@ -74,7 +74,7 @@ glm::vec3 Box::generate_normale(glm::vec3 const& v)const{
 
     return normal;
 }
-
+/*
 bool Box::intersect (Ray const& ray, float& dista, glm::vec3& intersection, glm::vec3& normal) const{
 	float tnear,tfar;
 	float tnear_x,tnear_y,tnear_z;
@@ -178,7 +178,7 @@ bool Box::intersect (Ray const& ray, float& dista, glm::vec3& intersection, glm:
     }
 	return false;
 }
-
+*/
 
 Hit Box::intersect (Ray const& ray){
 	float t0, t1;

@@ -20,28 +20,29 @@ class Camera {
 		Camera(std::string name, float fov_x);
 		Camera(std::string name, float fov_x, glm::vec3 const& eye_, 
 			   glm::vec3 const& dir_, glm::vec3 const& up_);
-		Camera(std::string name, float fov_x, glm::vec3 const& eye_, glm::vec3 const& up);
 		~Camera();
 
 		Camera& operator= (Camera const& rhs);
 		friend std::ostream& operator<<(std::ostream& os, Camera const& c);
 		
-		Ray createRay(float x, float y);
+		Ray createRay(int x, int y, int height, int width);
 
 		std::string get_name() const;
 		float get_angle() const;
 		glm::vec3 get_position() const; 
 		glm::vec3 get_direction() const; 
 		glm::vec3 get_up() const;
+		float get_distance() const;
 
+
+
+//	private:
 		std::string name_;
-
-	private:
 		float fov_x_; //horizontal openeningangle
 		glm::vec3 eye_; // Position in space
 		glm::vec3 dir_; // line of sight
 		glm::vec3 up_; // Up-Vector
-		float distance_; // distabce to pixel canvas
+		float distance_; // distance to pixel canvas
 };
 
 #endif

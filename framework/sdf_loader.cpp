@@ -44,9 +44,9 @@ Scene Sdf_loader::load_scene(std::string filename){
                     ss >> mat.kd_.g;
                     ss >> mat.kd_.b;
 
-                    ss >> mat.ks_.b;
                     ss >> mat.ks_.r;
                     ss >> mat.ks_.g;
+                    ss >> mat.ks_.b;
 
                     ss >> mat.m_;
 
@@ -57,20 +57,25 @@ Scene Sdf_loader::load_scene(std::string filename){
 
     			else if(keyword == "camera"){
                     std::string name;
-                    float angle, pos_x, pos_y, pos_z, up_x, up_y, up_z;
+                    float fov, pos_x, pos_y, pos_z, up_x, up_y, up_z, dir_x, dir_y, dir_z;
                     ss >> name;
-                    ss >> angle;
+                    ss >> fov;
                     ss >> pos_x;
                     ss >> pos_y;
                     ss >> pos_z;
+                    glm::vec3 pos {pos_x, pos_y, pos_z};
+                    ss >> dir_x;
+                    ss >> dir_y;
+                    ss >> dir_z;
+                    glm::vec3 dir {dir_x, dir_y, dir_z};
                     ss >> up_x;
                     ss >> up_y;
                     ss >> up_z;
-                    glm::vec3 pos {pos_x, pos_y, pos_z};
                     glm::vec3 up {up_x, up_y, up_z};
+
                     
 
-                    Camera cam {name, angle, pos, up}; //ohne direction
+                    Camera cam {name, fov, pos, dir, up};
                     std::cout << cam;
                     s.camera = cam;
                 }
@@ -118,7 +123,6 @@ Scene Sdf_loader::load_scene(std::string filename){
                         (
                             Box{name, s.materials[mat_namebox], min, max}
                         );
-
                         std::cout << *temp_ptr;
                         s.shapes_ptr.push_back(temp_ptr);
 
@@ -132,12 +136,12 @@ Scene Sdf_loader::load_scene(std::string filename){
                         ss >> z;
                         glm::vec3 center{x,y,z};
                         ss >> r;
-                        std::string mat_name;
-                        ss >> mat_name;
+                        std::string mat_namesphere;
+                        ss >> mat_namesphere;
 
                         std::shared_ptr<Shape> temp_ptr = std::make_shared<Sphere>
                         (
-                            Sphere{name, s.materials[mat_name], center, r}
+                            Sphere{name, s.materials[mat_namesphere], center, r}
                         );
                             std::cout << *temp_ptr;
                             s.shapes_ptr.push_back(temp_ptr);

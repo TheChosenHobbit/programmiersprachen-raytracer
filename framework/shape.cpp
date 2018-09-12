@@ -22,10 +22,12 @@ Material const& Shape::getMaterial() const {
 }
 
 std::ostream& Shape::print(std::ostream& os) const{
-	os << "Name: " << name_ << std::endl;
-	os << "Material: " << material_.name_ << ", Ka: " << material_.ka_ << ", Kd:" << material_.kd_ 
-	<< ", ks" << material_.ks_ << std::endl;
-	os << "Exponent für spiegelnde Reflexion: " << material_.m_ << std::endl; 
+	os << "Name: " << name_ <<"\n"
+	 << "Material: " << material_.name_  <<"\n"
+	 << "Ka: " << material_.ka_ <<"\n"
+	 << "Kd:" << material_.kd_ <<"\n"
+	 << "ks" << material_.ks_ << "\n"
+	 << "Exponent für spiegelnde Reflexion: " << material_.m_ << "\n\n";
 	return os;
 }
 

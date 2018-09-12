@@ -38,11 +38,11 @@ std::ostream& Sphere::print(std::ostream& os) const{
 	os << "Radius: " << radius_ << std::endl;
 	return os;
 }
-
+/*
 bool Sphere::intersect (Ray const& ray, float& distance, glm::vec3& intersection, glm::vec3& normal) const{
 	auto norm_direction = glm::normalize(ray.direction);
 	return glm::intersectRaySphere(ray.origin, norm_direction, center_, radius_, intersection, normal);
-}
+}*/
 
 Hit Sphere::intersect (Ray const& ray){
 	ray.direction = glm::normalize(ray.direction);

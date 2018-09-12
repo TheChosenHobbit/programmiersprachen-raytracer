@@ -22,7 +22,6 @@
 #include "shape.hpp"
 #include "ray.hpp"
 
-
 class Renderer
 {
 public:

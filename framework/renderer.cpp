@@ -57,8 +57,7 @@ void Renderer::render(){
   for(unsigned y = 0; y < height_; ++y){
     for (unsigned x = 0; x < width_; ++x){
 
-      Ray ray = cam.createRay(x,y);
-
+      Ray ray = cam.createRay(x, y, height_, width_);
       Pixel p(x,y);
       Color color{};
       color = raytrace(ray);
@@ -110,10 +109,12 @@ void Renderer::write(Pixel const& p)
 //findet den ersten Hit unter allen Shapes
 Hit Renderer::findHit(std::vector<std::shared_ptr<Shape>> const& shapes, Ray const& ray)
 {
+
   Hit firstHit{};
   firstHit.distance_ = 100000000.0f;
   //macht ein intersect über jedes Shape
-  for(auto it = shapes.begin(); it != shapes.end(); it ++){
+  for(auto it = shapes.begin(); it != shapes.end(); it ++)
+  {
     Hit hit = (**it).intersect(ray);
     //wenn getroffen wurde, wird verglichen ob es der näheste Treffer ist
     if (hit.is_hit_){
@@ -134,7 +135,7 @@ Color Renderer::raytrace(Ray const& ray)
 
   if(camHit.is_hit_ == false){
     color = scene_.backgroundcolor;
-  } 
+  }
   else {
 
     Material mat = camHit.material_;
@@ -168,6 +169,7 @@ Color Renderer::raytrace(Ray const& ray)
           color.b += mat.kd_.b * (*it).ld_.b * (glm::dot(camHit.normvec_, lightRay.direction) + mat.ks_.b);
         
       }
+
     }
   }
   return color;
