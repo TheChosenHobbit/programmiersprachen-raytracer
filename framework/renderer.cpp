@@ -172,7 +172,7 @@ Color Renderer::raytrace(Ray const& ray)
       Hit lightHits = findHit(scene_.shapes_ptr, lightRay);
 
       glm::vec3 spec_light = glm::reflect(lightVec, camHit.normvec_);
-      float r_v_ = pow(glm::dot(glm::normalize(ray.direction) , glm::normalize(spec_light)), mat.m_);  //Spiegelende Reflexion
+      float r_v_ = pow(glm::dot(glm::normalize(ray.inv_direction) , glm::normalize(spec_light)), mat.m_);  //Spiegelende Reflexion
 
       //Schatten
       if(!lightHits.is_hit_)
