@@ -43,7 +43,7 @@ bool Sphere::intersect (Ray const& ray, float& distance, glm::vec3& intersection
 	auto norm_direction = glm::normalize(ray.direction);
 	return glm::intersectRaySphere(ray.origin, norm_direction, center_, radius_, intersection, normal);
 }*/
-
+/*
 Hit Sphere::intersect (Ray const& ray){
 	ray.direction = glm::normalize(ray.direction);
 	float distance;
@@ -54,6 +54,30 @@ Hit Sphere::intersect (Ray const& ray){
 		intersec = ray.origin + ray.direction * distance;
 		normvec = glm::normalize(intersec - center_);
 		Hit hi (hit, distance, intersec, normvec, material_, "sphere");
+
+		return hi;
+	} else {
+		Hit hi{};
+		return hi;
+	}
+}
+*/
+Hit Sphere::intersect (Ray const& ray){
+	ray = ray.transformRay(world_transformation_);
+	ray.direction = glm::normalize(ray.direction);
+	float distance;
+	glm::vec3 world_intersec, world_normvec;
+	glm::vec3 local_intersec;
+	glm::vec4 local_normvec;
+	bool hit = glm::intersectRaySphere(ray.origin, ray.direction, center_, radius_ * radius_, distance);
+
+	if(hit){
+		local_intersec = ray.origin + ray.direction * distance;
+		local_normvec = glm::vec4{glm::normalize(local_intersec - center_),0.0f};
+
+		world_intersec = glm::vec3{world_transformation_ * glm::vec4{local_intersec,1}};
+		world_normvec = glm::vec3{world_transformation_inv_transposed_ * local_normvec};
+		Hit hi (hit, distance, world_intersec, world_normvec, material_, "sphere");
 
 		return hi;
 	} else {

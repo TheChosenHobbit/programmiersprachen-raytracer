@@ -1,4 +1,4 @@
-#include "sdf_loader.hpp"
+ #include "sdf_loader.hpp"
 
 Sdf_loader::Sdf_loader():
 	filename_{""}{}
@@ -121,8 +121,9 @@ Scene Sdf_loader::load_scene(std::string filename){
 
                         std::shared_ptr<Shape> temp_ptr = std::make_shared<Box>
                         (
-                            Box{name, s.materials[mat_namebox], min, max}
+                            Box{name, s.materials[mat_namebox],glm::mat4(1.0f), min, max}
                         );
+                        temp_ptr -> scale(glm::vec3{1.0f,1.0f,1.0f});
                         std::cout << *temp_ptr;
                         s.shapes_ptr.push_back(temp_ptr);
 

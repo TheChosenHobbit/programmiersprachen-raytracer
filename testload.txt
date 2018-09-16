@@ -3,7 +3,7 @@ define material blue 0 0 1 0 0 1 0 0 1 0
 define material green 0 1 0 0 1 0 0 1 0 0
 
 define shape box bottomplate -300 -40 0 300 -40 -400 green
-define shape box movingbox -60 -35 -100 -30 -15 -70 red
+define shape box movingbox -30 -35 -100 30 -15 -70 red
 
 define shape sphere bsphere 30 20 -100 15 green
 define shape sphere bsphere1 0 0 -70 10 red

@@ -15,7 +15,7 @@ Shape::Shape(std::string const& name, Material const& material, glm::mat4 const&
 	name_{name},
 	material_{material},
 	world_transformation_{world_transformation},
-	world_transformation_inv_{glm::inverse(world_transformation)}{ std::cout << "Shape::Destructor" << std::endl;}
+	world_transformation_inv_{glm::inverse(world_transformation)}{ std::cout << "Shape::Constructor" << std::endl;}
 
 
 Shape::~Shape(){ std::cout << "Shape::Destructor" << std::endl;  }
@@ -34,6 +34,16 @@ glm::mat4 const& Shape::getMatrix() const{
 
 glm::mat4 const& Shape::setInvMatrix() const{
 	world_transformation_inv_ = glm::inverse(world_transformation_);
+}
+
+void Shape::scale(glm::vec3 const& scaling) const{
+	glm::mat4 scaling_mat{scaling.x,0.0f,0.0f,0.0f,
+						  0.0f,scaling.y,0.0f,0.0f,
+						  0.0f,0.0f,scaling.z,0.0f,
+						  0.0f,0.0f,0.0f,1.0f};
+	world_transformation_ = scaling_mat * world_transformation_;
+	world_transformation_inv_ = glm::inverse(world_transformation_);
+	world_transformation_inv_transposed_ = glm::transpose(world_transformation_inv_);
 }
 
 std::ostream& Shape::print(std::ostream& os) const{

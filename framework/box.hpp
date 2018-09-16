@@ -11,6 +11,7 @@ class Box: public Shape
   public: 
   	Box();
   	Box(std::string const& name, Material const& material, glm::vec3 const& minimum, glm::vec3 const& maximum);
+    Box(std::string const& name, Material const& material, glm::mat4 const& world_transformation, glm::vec3 const& minimum, glm::vec3 const& maximum);
 
   	~Box();
 

@@ -15,6 +15,11 @@ Box::Box(std::string const& name, Material const& material, glm::vec3 const& min
 	min_{min},
 	max_{max}{ std::cout << "Box::Constructor" << std::endl;}
 
+Box::Box(std::string const& name, Material const& material, glm::mat4 const& world_transformation, glm::vec3 const& min, glm::vec3 const& max):
+	Shape({name},{material},{world_transformation}),
+	min_{min},
+	max_{max}{ std::cout << "Box::Constructor" << std::endl;}
+
 Box::~Box(){ std::cout << "Box::Destructor" << std::endl; }
 
 float Box::area() const {
@@ -186,6 +191,124 @@ Hit Box::intersect (Ray const& ray){
 	float tfar;
 	bool hit = true;
 	float distance = -1;
+	glm::vec4 local_normvec;
+	glm::vec3 world_normvec;
+	glm::vec3 local_intersec;
+	glm::vec3 world_intersec;
+	Hit hi{};
+    ray = ray.transformRay(world_transformation_);
+
+	// {0,0,0} abfangen
+	if (ray.direction.x == 0 && ray.direction.y == 0 && ray.direction.z == 0) {return hi;}
+
+	if (ray.direction.x == Approx(0.0f))
+	{
+		
+		if(min_.x > ray.origin.x || max_.x < ray.origin.x) {return hi;}
+		//find intersect distance with x coord
+	} else {
+
+		t0 = (min_.x - ray.origin.x) / ray.direction.x;
+		t1 = (max_.x - ray.origin.x) / ray.direction.x;
+		tfar = std::max(t0,t1);
+		tnear = std::min(t0,t1);
+
+		if (tnear > tfar)
+		{
+			return hi;
+		}
+	}
+
+	if (ray.direction.y == Approx(0.0f))
+	{
+		
+		if(min_.y > ray.origin.y || max_.y < ray.origin.y) {return hi;}
+		//find intersect distance with y coord
+	} else {
+
+		t0 = (min_.y - ray.origin.y) / ray.direction.y;
+		t1 = (max_.y - ray.origin.y) / ray.direction.y;
+
+		if(ray.direction.x == Approx(0.0f)){
+
+			tfar = std::max(t0,t1);
+			tnear = std::min(t0,t1);
+
+		} else {
+
+			tnear = std::max(tnear, std::min(t0,t1));
+			tfar = std::min(tfar, std::max(t0,t1));
+		}
+		
+		if (tnear > tfar)
+		{
+			return hi;
+		}
+	}
+
+	if (ray.direction.z == Approx(0.0f))
+	{
+		
+		if(min_.z > ray.origin.z || max_.z < ray.origin.z) {return hi;}
+		//find intersect distance with z coord
+	} else {
+
+		t0 = (min_.z - ray.origin.z) / ray.direction.z;
+		t1 = (max_.z - ray.origin.z) / ray.direction.z;
+
+
+		if(ray.direction.x == Approx(0.0f) && ray.direction.y == Approx(0.0f)){
+
+			tfar = std::max(t0,t1);
+			tnear = std::min(t0,t1);
+			
+		} else {
+
+			tnear = std::max(tnear, std::min(t0,t1));
+			tfar = std::min(tfar, std::max(t0,t1));
+		}
+		
+		if (tnear > tfar)
+		{
+			return hi;
+		}
+	}
+
+	if(tnear < 0.0f && tfar < 0.0f) {return hi;} //ray.origin behind box
+	else if (tnear < 0.0f && tfar >= 0.0f) {tfar = tnear;} //ray.origin in box
+	
+	distance = tnear * sqrt(ray.direction.x * ray.direction.x + ray.direction.y * ray.direction.y + ray.direction.z * ray.direction.z);
+	local_intersec = ray.origin + ray.direction * tnear;
+	world_intersec = glm::vec3{world_transformation_ * glm::vec4{local_intersec,1}}; 
+	//calc normvector
+	if(local_intersec.x == Approx(min_.x)) 	   {local_normvec = {-1.0f, 0.0f, 0.0f, 0.0f};}
+	else if (local_intersec.x == Approx(max_.x)) {local_normvec = {1.0f, 0.0f, 0.0f, 0.0f};}
+	else if (local_intersec.y == Approx(min_.y)) {local_normvec = {0.0f, -1.0f, 0.0f, 0.0f};}
+	else if (local_intersec.y == Approx(max_.y)) {local_normvec = {0.0f, 1.0f, 0.0f, 0.0f};}
+	else if (local_intersec.z == Approx(min_.z)) {local_normvec = {0.0f, 0.0f, -1.0f, 0.0f};}
+	else if (local_intersec.z == Approx(max_.z)) {local_normvec = {0.0f, 0.0f, 1.0f, 0.0f};}
+
+	world_normvec = glm::vec3{world_transformation_inv_transposed_ * local_normvec};
+
+	//create hit
+	hi.is_hit_ = hit;
+	hi.distance_ = distance;
+	hi.intersec_ = world_intersec;
+	hi.normvec_ = glm::vec3{world_normvec};
+	hi.material_ = material_;
+	hi.type_ = "box";
+
+	return hi;
+}
+/*
+Hit Box::intersect(Ray const& ray){
+	Ray transformed_ray = ray.transformRay(world_transformation_);
+
+float t0, t1;
+	float tnear;
+	float tfar;
+	bool hit = true;
+	float distance = -1;
 	glm::vec3 normvec;
 	glm::vec3 intersec;
 	Hit hi{};
@@ -289,3 +412,5 @@ Hit Box::intersect (Ray const& ray){
 
 	return hi;
 }
+
+}*/
