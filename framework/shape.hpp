@@ -14,6 +14,7 @@ public:
 
 	Shape();
 	Shape(std::string const& name, Material const& material);
+    Shape(std::string const& name, Material const& material, glm::mat4 const& world_transformation);
     
 
 	/*virtual*/ ~Shape();
@@ -23,6 +24,8 @@ public:
 
     std::string const& getName() const;
     Material const& getMaterial() const;
+    glm::mat4 const& getMatrix() const;
+    glm::mat4 const& setInvMatrix() const;
 
     virtual std::ostream& print(std::ostream& os) const;
 

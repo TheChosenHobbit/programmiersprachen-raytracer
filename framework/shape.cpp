@@ -11,6 +11,13 @@ Shape::Shape(std::string const& name, Material const& material):
 	name_{name},
 	material_{material}{ std::cout << "Shape::Constructor" << std::endl; }
 
+Shape::Shape(std::string const& name, Material const& material, glm::mat4 const& world_transformation):
+	name_{name},
+	material_{material},
+	world_transformation_{world_transformation},
+	world_transformation_inv_{glm::inverse(world_transformation)}{ std::cout << "Shape::Destructor" << std::endl;}
+
+
 Shape::~Shape(){ std::cout << "Shape::Destructor" << std::endl;  }
 
 std::string const& Shape::getName() const {
@@ -19,6 +26,14 @@ std::string const& Shape::getName() const {
 
 Material const& Shape::getMaterial() const {
 	return material_;
+}
+
+glm::mat4 const& Shape::getMatrix() const{
+	return world_transformation_;
+}
+
+glm::mat4 const& Shape::setInvMatrix() const{
+	world_transformation_inv_ = glm::inverse(world_transformation_);
 }
 
 std::ostream& Shape::print(std::ostream& os) const{

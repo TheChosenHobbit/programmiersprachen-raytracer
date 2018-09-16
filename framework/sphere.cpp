@@ -53,7 +53,6 @@ Hit Sphere::intersect (Ray const& ray){
 	if(hit){
 		intersec = ray.origin + ray.direction * distance;
 		normvec = glm::normalize(intersec - center_);
-
 		Hit hi (hit, distance, intersec, normvec, material_, "sphere");
 
 		return hi;
