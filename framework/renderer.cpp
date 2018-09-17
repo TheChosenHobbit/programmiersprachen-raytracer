@@ -61,7 +61,10 @@ void Renderer::render(){
       Pixel p(x,y);
       Color color{};
       color = raytrace(ray);
-      
+
+      //Tone Mapping
+      //color = tone_mapping(color);
+
       p.color = color;
       write(p);
       
@@ -185,4 +188,13 @@ Color Renderer::raytrace(Ray const& ray)
     }
   }
   return color;
+}
+
+Color Renderer::tone_mapping(Color color)
+{
+  Color col{};
+  col.r = (color.r / (color.r +1));
+  col.g = (color.g / (color.g +1));
+  col.b = (color.b / (color.b +1));
+  return col;
 }

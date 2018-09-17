@@ -34,6 +34,7 @@ public:
 
   Hit findHit(std::vector<std::shared_ptr<Shape>> const& shapes, Ray const& ray);
   Color raytrace(Ray const& ray);
+  Color tone_mapping(Color color);
 
   inline std::vector<Color> const& colorbuffer() const
   {
